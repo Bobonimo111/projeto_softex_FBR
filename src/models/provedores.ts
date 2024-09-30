@@ -1,13 +1,13 @@
 import { Model, DataType, DataTypes } from "sequelize";
-import dataBase from "./dataBase";
+import { sequelize } from "./dataBase";
 
-class fornecedor extends Model {
+class provedor extends Model {
     public id!: number;
     public email!: String;
     public password!: String;
 }
 
-fornecedor.init(
+provedor.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -25,9 +25,9 @@ fornecedor.init(
 
     },
     {
-        sequelize: dataBase,
-        tableName: "fornecedores"
+        sequelize,
+        tableName: "provedores"
     }
 )
 
-export default fornecedor;
+export default provedor;

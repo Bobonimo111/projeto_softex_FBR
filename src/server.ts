@@ -1,10 +1,13 @@
 import express, { Router } from "express";
 import dotenv from "dotenv"
 import { join } from "path";
+
+//Conecção com o banco de dados 
+import { sequelize } from "./models/dataBase";
+
 //Importação de rotas
 //Nomeando a rota user como userRouter para ser usada no main
 import userRouter from "./routes/user";
-import dataBase from "./models/dataBase";
 
 //Iniciando a apliação
 const app = express();
@@ -23,10 +26,10 @@ app.use("/user", userRouter);
 
 //Inicia o servidor
 app.listen(process.env.port, () => {
-    dataBase.authenticate()
+    sequelize.authenticate()
         .then(() => {
             console.log('Conexão com o banco de dados estabelecida com sucesso.');
-            return dataBase.sync(); // Sincroniza os modelos
+            return sequelize.sync(); // Sincroniza os modelos
         })
         .then(() => {
             console.log('Modelos sincronizados com o banco de dados.');
