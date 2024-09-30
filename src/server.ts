@@ -8,12 +8,16 @@ import { sequelize } from "./models/dataBase";
 //Importação de rotas
 //Nomeando a rota user como userRouter para ser usada no main
 import userRouter from "./routes/user";
+import provedorRouter from "./routes/provedores"
 
 //Iniciando a apliação
 const app = express();
 //Configurando as variaveis de ambiente
-dotenv.config()
+dotenv.config();
 
+//configuração de leitura de json
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 //Configuração de arquivos de renderização
 app.set("view engine", "ejs");
 app.set("views", join(__dirname, "/views"));
@@ -23,6 +27,7 @@ app.use("/static", express.static(join(__dirname, "public")));
 
 //Configuração de rotas
 app.use("/user", userRouter);
+app.use("/provedor", provedorRouter)
 
 //Inicia o servidor
 app.listen(process.env.port, () => {
@@ -33,7 +38,7 @@ app.listen(process.env.port, () => {
         })
         .then(() => {
             console.log('Modelos sincronizados com o banco de dados.');
-            console.log(`Servidor rodando na porta ${process.env.port}`);
+            console.log(`Servidor rodando  http://localhost:${process.env.port}`);
         })
         .catch(error => {
             console.error('Erro ao conectar-se ao banco de dados:', error);
