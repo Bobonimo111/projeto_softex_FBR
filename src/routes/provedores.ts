@@ -9,6 +9,10 @@ router.post("/", function (req: Request, res: Response) {
     const { email } = req.body;
 
     //adicionar criptografia, e escrita no banco de dados
+    if (senha == undefined || senha == "") {
+        res.set("content-type", "application/json")
+        res.json({ error: "Not Recive password!!" }).status(204);
+    }
 });
 
 router.get("/", function (req: Request, res: Response) {
