@@ -2,9 +2,9 @@ import { Model, DataType, DataTypes } from "sequelize";
 import { sequelize } from "./dataBase";
 
 class provedor extends Model {
-    public id!: number;
-    public email!: String;
-    public password!: String;
+    declare id: number;
+    declare email: String;
+    declare password: String;
 }
 
 provedor.init(
