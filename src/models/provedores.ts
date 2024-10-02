@@ -1,13 +1,13 @@
 import { Model, DataType, DataTypes } from "sequelize";
 import { sequelize } from "./dataBase";
 
-class provedor extends Model {
+class Provedor extends Model {
     declare id: number;
     declare email: String;
     declare password: String;
 }
 
-provedor.init(
+Provedor.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -30,4 +30,4 @@ provedor.init(
     }
 )
 
-export default provedor;
+export default Provedor;

@@ -1,6 +1,12 @@
 # projeto_softex_FBR
 
-## Comandos de execução
+> Projeto criado com intuito de servir como a finalização da terceira edição do FAP pernambuco.
+
+## Comandos
+
+## `npm install`
+Instala as dependencias necessarias para iniciar o projeto 
+
 ### `npm run dev`
 para iniciar o servidor em estado de desenvolvimento.
 
