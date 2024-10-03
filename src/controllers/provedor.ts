@@ -18,12 +18,13 @@ function cadastro(req: Request, res: Response) {
         //se finalmente nada der errado
         //adicionar a criação ao banco de dados
         const provedor = provedorModel.build({ email: email, password: password });
-        console.log(provedor)
+        // console.log(provedor)
         provedor.save().then(function () {
-            res.send("provedor is created").status(200);
+            res.send("provedor is created").status(201);
         }).catch(function () {
+            res.send("fail to created provedor").status(400);
             //Adicionar um retorno de erro de salvamento da API
-            console.log("Ocorreu um erro")
+            console.log("fail to created provedor");
         })
     }
 }
