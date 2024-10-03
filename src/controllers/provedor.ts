@@ -1,10 +1,7 @@
 import express, { Request, Response } from "express";
 import provedorModel from "../models/provedores"
-const router = express.Router();
 
-
-//Definir get, post(com criptografia);
-router.post("/", function (req: Request, res: Response) {
+function cadastro(req: Request, res: Response) {
     //Email
     //Senha
     const { password } = req.body;
@@ -29,15 +26,6 @@ router.post("/", function (req: Request, res: Response) {
             console.log("Ocorreu um erro")
         })
     }
-});
+}
 
-router.get("/", function (req: Request, res: Response) {
-    //Retorna 
-    res.send("Provedores")
-});
-
-router.get("/all", function (req: Request, res: Response) {
-    //retornar todos os provedores cadastrados
-})
-
-export default router;
+export { cadastro };
