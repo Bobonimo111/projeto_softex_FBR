@@ -8,7 +8,7 @@ import { sequelize } from "./models/dataBase";
 //Importação de rotas
 //Nomeando a rota user como userRouter para ser usada no main
 import userRouter from "./routes/user";
-import provedorRouter from "./routes/provedores"
+import provedorRouter from "./routes/provedor"
 
 //Iniciando a apliação
 const app = express();
