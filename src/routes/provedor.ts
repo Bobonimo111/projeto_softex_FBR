@@ -7,5 +7,7 @@ import * as provedorController from "../controllers/provedor";
 /* DEFINIR MIDDLEARE OU SENHA PARA QUE APENAS UM ADM CONSIGA CRIAR UM PROVEDOR */
 router.post("/", provedorController.cadastro);
 
+/** DEFINIR PARA QUE O PROVEDOR CONSIGA ACESSAR A APARTIR DA SENHA DEFINIDA */
+router.post("/", provedorController.login);
 
 export default router;

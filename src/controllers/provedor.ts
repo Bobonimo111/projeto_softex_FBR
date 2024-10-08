@@ -31,4 +31,5 @@ function cadastro(req: Request, res: Response) {
     }
 }
 
+
 export { cadastro };

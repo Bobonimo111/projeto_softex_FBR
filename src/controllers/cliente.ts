@@ -56,4 +56,6 @@ function cadastro(req: Request, res: Response) {
     }
 }
 
+// function atualizar()
+
 export { login, cadastro };

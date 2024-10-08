@@ -5,3 +5,9 @@
 #
 >
 > Alem que tambem iria testar se a rota esta puxando corretamente por email para login;
+
+### 08/10/2024 Terca-feira
+>
+> Densenvolvida a parte de criptografia de senha para cliente e cadastro
+
+><div style="color:red">Definir o envio de email do ADM para o provedor cadastrado confirmando um cadastro<div>
