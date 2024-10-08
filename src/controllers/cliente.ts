@@ -16,12 +16,12 @@ function login(req: Request, res: Response) {
         clienteModel.findOne({ where: { "email": email } }).then(data => {
             if (data) {
                 if (bcrypt.compareSync(password, data.password.toString())) {
-                    res.send({ msg: "OK" }).status(202)
+                    res.send({ msg: "OK" }).status(202);
                 } else {
-                    res.send({ msg: "Incorrect password" }).status(404)
+                    res.send({ msg: "Incorrect password" }).status(404);
                 }
             } else {
-                res.send({ msg: "Email is not found" }).status(404)
+                res.send({ msg: "Email is not found" }).status(404);
             }
         })
     }
