@@ -31,7 +31,7 @@ app.use("/static", express.static(join(__dirname, "public")));
 app.use(session({
     secret: "Frase secreta",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         maxAge: 60 * 60 * 1000 // 1 hora de sessão
     }
@@ -43,6 +43,7 @@ app.use("/provedor", provedorRouter)
 
 //Inicia o servidor
 app.listen(process.env.port, () => {
+    //INICIALIZAÇÃO DO BANCO DE DADOS
     sequelize.authenticate()
         .then(() => {
             console.log('Conexão com o banco de dados estabelecida com sucesso.');

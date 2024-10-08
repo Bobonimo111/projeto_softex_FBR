@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import provedorModel from "../models/provedores"
-import bccypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 function cadastro(req: Request, res: Response) {
     //Email
@@ -16,7 +16,7 @@ function cadastro(req: Request, res: Response) {
         res.set("content-type", "application/json");
         res.json({ error: "Not Recive email, email is null or invalid" }).status(204);
     } else {
-        let hash = bccypt.hashSync(password, 10);
+        let hash = bcrypt.hashSync(password, 10);
         //se finalmente nada der errado
         //adicionar a criação ao banco de dados
         const provedor = provedorModel.build({ email: email, password: hash });
@@ -42,9 +42,13 @@ function login(req: Request, res: Response) {
         res.json({ msg: "Not Recive email, email is null or invalid" }).status(204);
     } else {
         /*REALIZAR CONFERENCIA DE CREDENCIAIS*/
-        clienteModel.findOne({ where: { "email": email } }).then(data => {
+        provedorModel.findOne({ where: { "email": email } }).then(data => {
             if (data) {
                 if (bcrypt.compareSync(password, data.password.toString())) {
+                    /*QUALQUER ERRO É CULPA DA IDE, AS SESSÕES ESTÃO FUNCIONANDO NORMALMENTE*/
+                    req.session.auth = true;
+                    req.session.type = "provedor"
+                    //console.log(req.session)
                     res.send({ msg: "OK" }).status(202);
                 } else {
                     res.send({ msg: "Incorrect password" }).status(404);
@@ -56,4 +60,10 @@ function login(req: Request, res: Response) {
     }
 };
 
-export { cadastro };
+/*MID FUNCIONA*/
+// function test(req: Request, res: Response) {
+//     console.log("Middleware funcionando")
+//     res.send("ENTROU COM MID")
+// }
+
+export { cadastro, login, test };

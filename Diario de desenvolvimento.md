@@ -11,3 +11,9 @@
 > Densenvolvida a parte de criptografia de senha para cliente e cadastro
 
 ><div style="color:red">Definir o envio de email do ADM para o provedor cadastrado confirmando um cadastro<div>
+>
+#
+>
+> definido o middlewares basicos para sessões das três entidades
+
+> definido apenas um ADM logado pode cadastrar um provedor
