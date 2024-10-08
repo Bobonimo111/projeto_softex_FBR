@@ -9,4 +9,5 @@ router.get("/test", (req: Request, res: Response) => {
     res.render("user");
 })
 
+
 export default router;

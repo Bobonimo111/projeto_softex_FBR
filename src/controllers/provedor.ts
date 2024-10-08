@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import provedorModel from "../models/provedores"
+import bccypt from "bcrypt";
 
 function cadastro(req: Request, res: Response) {
     //Email
@@ -15,9 +16,10 @@ function cadastro(req: Request, res: Response) {
         res.set("content-type", "application/json");
         res.json({ error: "Not Recive email, email is null or invalid" }).status(204);
     } else {
+        let hash = bccypt.hashSync(password, 10);
         //se finalmente nada der errado
         //adicionar a criação ao banco de dados
-        const provedor = provedorModel.build({ email: email, password: password });
+        const provedor = provedorModel.build({ email: email, password: hash });
         // console.log(provedor)
         provedor.save().then(function () {
             res.send("provedor is created").status(201);

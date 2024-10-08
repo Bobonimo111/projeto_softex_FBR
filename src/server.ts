@@ -6,8 +6,8 @@ import { join } from "path";
 import { sequelize } from "./models/dataBase";
 
 //Importação de rotas
-//Nomeando a rota user como userRouter para ser usada no main
-import userRouter from "./routes/user";
+//Nomeando a rota user como clieteRouter para ser usada no main
+import clienteRouter from "./routes/cliente";
 import provedorRouter from "./routes/provedor"
 
 //Iniciando a apliação
@@ -26,7 +26,7 @@ app.set("views", join(__dirname, "/views"));
 app.use("/static", express.static(join(__dirname, "public")));
 
 //Configuração de rotas
-app.use("/user", userRouter);
+app.use("/cliente", clienteRouter);
 app.use("/provedor", provedorRouter)
 
 //Inicia o servidor
