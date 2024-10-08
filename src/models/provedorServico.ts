@@ -8,5 +8,12 @@ class Servico extends Model {
     //declare provedor: Provedor;
 }
 
-Servico.init({
-})
+Servico.init(
+    {},
+    {
+        sequelize,
+        tableName: "servico"
+    }
+)
+
+export default Servico;
