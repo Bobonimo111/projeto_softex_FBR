@@ -30,6 +30,29 @@ function cadastro(req: Request, res: Response) {
         })
     }
 }
-
+function login(req: Request, res: Response) {
+    const { email } = req.body;
+    const { password } = req.body;
+    if (password == undefined || password == "") {
+        res.set("content-type", "application/json");
+        res.json({ msg: "Not Recive password, password is null or invalid" }).status(204);
+    } else if (email == undefined || email == "") {
+        res.set("content-type", "application/json");
+        res.json({ msg: "Not Recive email, email is null or invalid" }).status(204);
+    } else {
+        /*REALIZAR CONFERENCIA DE CREDENCIAIS*/
+        clienteModel.findOne({ where: { "email": email } }).then(data => {
+            if (data) {
+                if (bcrypt.compareSync(password, data.password.toString())) {
+                    res.send({ msg: "OK" }).status(202)
+                } else {
+                    res.send({ msg: "Incorrect password" }).status(404)
+                }
+            } else {
+                res.send({ msg: "Email is not found" }).status(404)
+            }
+        })
+    }
+}
 
 export { cadastro };
