@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 import dotenv from "dotenv"
 import { join } from "path";
+import session from "express-session";
 
 //Conecção com o banco de dados 
 import { sequelize } from "./models/dataBase";
@@ -24,6 +25,17 @@ app.set("views", join(__dirname, "/views"));
 
 //Configuração de arquivos estaticos
 app.use("/static", express.static(join(__dirname, "public")));
+
+
+//Configuração de sessão
+app.use(session({
+    secret: "Frase secreta",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 60 * 60 * 1000 // 1 hora de sessão
+    }
+}));
 
 //Configuração de rotas
 app.use("/cliente", clienteRouter);
