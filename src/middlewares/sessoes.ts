@@ -1,4 +1,5 @@
 import { Response, Request } from "express";
+
 function adm(req: Request, res: Response, next) {
     if (req.session.user) {
         next()
