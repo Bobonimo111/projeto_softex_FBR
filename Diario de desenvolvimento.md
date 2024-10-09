@@ -17,3 +17,9 @@
 > definido o middlewares basicos para sessões das três entidades
 
 > definido apenas um ADM logado pode cadastrar um provedor
+
+### 09/10/2024
+>
+>Definir o agendamento como uma parte intermediaria antes de ser lançada no cronograma oficial é uma parte importante, já que o agendamento é um ato e o cronograma seria colocar esse ato no papel ou seja agendar;
+
+> inicar o desenvolvimento do ADM
