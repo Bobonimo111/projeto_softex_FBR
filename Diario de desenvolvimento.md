@@ -23,3 +23,7 @@
 >Definir o agendamento como uma parte intermediaria antes de ser lançada no cronograma oficial é uma parte importante, já que o agendamento é um ato e o cronograma seria colocar esse ato no papel ou seja agendar;
 
 > inicar o desenvolvimento do ADM
+> Etapas inicais da criação do Model para administrador
+> Apenas uns mapa pra eu me seguir onde eu estou
+![permissão de criação](Diario%20de%20desenvolvimento/permissoes%20de%20criacao.png)
+![solicitação cliente fornecedor](Diario%20de%20desenvolvimento/Soliciatacao%20cliente%20forncedor.png)
