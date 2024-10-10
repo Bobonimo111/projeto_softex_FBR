@@ -1,4 +1,4 @@
-import { Model, DataType, DataTypes } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import { sequelize } from "./dataBase";
 
 class Provedor extends Model {

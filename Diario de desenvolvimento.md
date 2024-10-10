@@ -24,6 +24,7 @@
 
 > inicar o desenvolvimento do ADM
 > Etapas inicais da criação do Model para administrador
+
 > Apenas uns mapa pra eu me seguir onde eu estou
 ![permissão de criação](Diario%20de%20desenvolvimento/permissoes%20de%20criacao.png)
 ![solicitação cliente fornecedor](Diario%20de%20desenvolvimento/Soliciatacao%20cliente%20forncedor.png)

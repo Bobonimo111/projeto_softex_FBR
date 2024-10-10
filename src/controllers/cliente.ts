@@ -16,6 +16,8 @@ function login(req: Request, res: Response) {
         clienteModel.findOne({ where: { "email": email } }).then(data => {
             if (data) {
                 if (bcrypt.compareSync(password, data.password.toString())) {
+                    req.session.auth = true;
+                    req.session.type = "cliente";
                     res.send({ msg: "OK" }).status(202);
                 } else {
                     res.send({ msg: "Incorrect password" }).status(404);
