@@ -40,3 +40,4 @@
 >Sigo buscando um servidor de emails gratuito que eu posssa utilizar para testes, todos os que eu encontro ou nescessitam de autenticação ou são pagos.
 >
 >Após muita luta consegui enviar um email de forma automatica usando o <https://app.mailersend.com/domains/o65qngkn7yjgwr12>;
+>Iniciado rotas para agendamento de serviço
