@@ -28,3 +28,15 @@
 > Apenas uns mapa pra eu me seguir onde eu estou
 ![permissão de criação](Diario%20de%20desenvolvimento/permissoes%20de%20criacao.png)
 ![solicitação cliente fornecedor](Diario%20de%20desenvolvimento/Soliciatacao%20cliente%20forncedor.png)
+
+### 12/10/2024
+>
+>Inicou o desenvolvimento do sistema de envios de emails
+>
+>Configurando credenciais Oauth API
+
+### 14/10/2024
+>
+>Sigo buscando um servidor de emails gratuito que eu posssa utilizar para testes, todos os que eu encontro ou nescessitam de autenticação ou são pagos.
+>
+>Após muita luta consegui enviar um email de forma automatica usando o <https://app.mailersend.com/domains/o65qngkn7yjgwr12>;
