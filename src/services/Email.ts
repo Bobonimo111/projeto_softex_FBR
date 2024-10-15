@@ -10,19 +10,19 @@
  */
 import nodemailer from "nodemailer";
 interface IEmail {
-    to: string | string[];
-    subject: string;
-    text?: string;
-    html: string;
+    to: String | String[] | undefined;
+    subject: String;
+    text?: String;
+    html: String;
 }
 
 class Email {
-    private user: string | undefined;
-    private pass: string | undefined;
-    private host: string | undefined;
+    private user: String | undefined;
+    private pass: String | undefined;
+    private host: String | undefined;
     private trasporter: any;
 
-    constructor(user: string | undefined, pass: string | undefined, host: string | undefined) {
+    constructor(user: String | undefined, pass: String | undefined, host: String | undefined) {
         this.user = user;
         this.pass = pass;
         this.host = host;
@@ -44,7 +44,7 @@ class Email {
             logger: true
         });
     }
-    public mailOptions(destinatario: string, assunto: string, html: string, texto: string = "") {
+    public mailOptions(destinatario: String | undefined, assunto: String, html: String, texto: String = "") {
         return {
             from: this.user,       // endereço de email do remetente
             to: destinatario,    // lista de destinatários
@@ -68,7 +68,7 @@ class Email {
 }
 
 export { Email }
-// export const enviar = function (login: string | undefined, pass: string | undefined) {
+// export const enviar = function (login: String | undefined, pass: String | undefined) {
 
 //     const transporter: any =
 
