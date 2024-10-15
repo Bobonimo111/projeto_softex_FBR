@@ -41,3 +41,9 @@
 >
 >Após muita luta consegui enviar um email de forma automatica usando o <https://app.mailersend.com/domains/o65qngkn7yjgwr12>;
 >Iniciado rotas para agendamento de serviço
+>
+### 15/10/2024
+>
+>Rota de agendamento em desenvolvimento, vou pular a etapa de verificar se os campos estão escritos de formas correta para poupar tempo.
+>
+>Rota para solicitar novo agendamento esta pronto agora preciso do banco para testar.

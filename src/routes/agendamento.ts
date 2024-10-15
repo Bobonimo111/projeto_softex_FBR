@@ -1,6 +1,6 @@
 import express, { Response, Request } from "express";
 const router = express.Router();
-
+import * as agendamentoController from "../controllers/agendamento"
 /**
  * Rota para criar novo agendamento post 
  * Rota para editar agendamento put
@@ -15,6 +15,8 @@ const router = express.Router();
  * status
  */
 
-router.post("/", (req: Request, res: Response) => {
+router.post("/", agendamentoController.solicitarNovoAgendamento);
+router.put("/",);
+router.put("/cancel",)
 
-})
+export default router;

@@ -10,7 +10,9 @@ import { sequelize } from "./models/dataBase";
 //Nomeando a rota user como clieteRouter para ser usada no main
 import clienteRouter from "./routes/cliente";
 import provedorRouter from "./routes/provedor"
-
+import agendamentoRouter from "./routes/agendamento"
+//Importando classes 
+import { Email } from "./services/Email";
 //Iniciando a apliação
 const app = express();
 //Configurando as variaveis de ambiente
@@ -39,7 +41,8 @@ app.use(session({
 
 //Configuração de rotas
 app.use("/cliente", clienteRouter);
-app.use("/provedor", provedorRouter)
+app.use("/provedor", provedorRouter);
+app.use("/agendamento", agendamentoRouter);
 
 //Inicia o servidor
 app.listen(process.env.port, () => {
