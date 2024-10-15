@@ -15,6 +15,7 @@ interface IEmail {
     text?: string;
     html: string;
 }
+
 class Email {
     private user: string | undefined;
     private pass: string | undefined;
@@ -26,6 +27,7 @@ class Email {
         this.pass = pass;
         this.host = host;
     }
+
     public init() {
         this.trasporter = nodemailer.createTransport({
             host: this.host,  // ou outro serviço (ex: Outlook, Yahoo)]
@@ -64,14 +66,8 @@ class Email {
             })
     }
 }
-const host = process.env.SMTP_HOST;
-const pass = process.env.SMTP_PASS;
-const user = process.env.SMTP_USER;
-const email = new Email(user, pass, host);
-email.init();
-email.send(email.mailOptions("Carlosmaycon443@gmail.com", "Apenas mais um teste qualquer", "<h1>ISSO É UM EMAIL DE TESTE DO FBR DIGITAL</h1>"))
 
-
+export { Email }
 // export const enviar = function (login: string | undefined, pass: string | undefined) {
 
 //     const transporter: any =
