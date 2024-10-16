@@ -2,7 +2,12 @@ import express from "express";
 const router = express.Router();
 import * as logger from "../middlewares/loggers";
 import * as provedorController from "../controllers/provedor";
-
+/**
+ * Rotas:
+ * Criar novo provedor apenas FBR
+ * Logar como provedor
+ * Retornar todos os provedores para FBR
+ */
 
 //Definir get, post, com criptografia;
 /* DEFINIR MIDDLEARE OU SENHA PARA QUE APENAS UM ADM CONSIGA CRIAR UM PROVEDOR */

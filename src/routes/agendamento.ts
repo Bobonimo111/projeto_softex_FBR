@@ -16,7 +16,7 @@ import * as agendamentoController from "../controllers/agendamento"
  */
 
 router.post("/", agendamentoController.solicitarNovoAgendamento);
-router.put("/",);
+router.put("/:id",);
 router.put("/cancel",)
 
 export default router;
