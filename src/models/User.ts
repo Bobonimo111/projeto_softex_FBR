@@ -7,8 +7,8 @@ interface UserAttributes {
     sexo: string;
     email: string;
     senha: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
     cnpj: string;
     role: 'cliente' | 'provedor' | 'administrador';
 }

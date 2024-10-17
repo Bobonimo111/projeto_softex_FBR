@@ -4,7 +4,7 @@ import { join } from "path";
 import session from "express-session";
 
 //Conecção com o banco de dados 
-import { sequelize } from "./models/dataBase";
+import { sequelize } from "./models/DataBase";
 
 //Importação de rotas
 //Nomeando a rota user como clieteRouter para ser usada no main
@@ -54,7 +54,7 @@ app.listen(process.env.port, () => {
     sequelize.authenticate()
         .then(() => {
             console.log('Conexão com o banco de dados estabelecida com sucesso.');
-            return sequelize.sync(); // Sincroniza os modelos
+            return sequelize.sync({ force: true }); // Sincroniza os modelos
         })
         .then(() => {
             console.log('Modelos sincronizados com o banco de dados.');

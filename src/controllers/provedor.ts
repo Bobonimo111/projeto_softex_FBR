@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import provedorModel from "../models/provedores"
+import provedorModel from "../models/Provedor"
 import bcrypt from "bcrypt";
 
 function cadastro(req: Request, res: Response) {

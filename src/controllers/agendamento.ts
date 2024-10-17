@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { Email } from "../services/Email";
-import clienteModel from "../models/clientes"
-import provedorModel from "../models/provedores"
-import ServicoModel from "../models/provedorServico"
+import clienteModel from "../models/Cliente"
+import provedorModel from "../models/Provedor"
+import ServicoModel from "../models/Servico"
 /**
  * Rota para criar novo agendamento post 
  * Rota para editar agendamento put
