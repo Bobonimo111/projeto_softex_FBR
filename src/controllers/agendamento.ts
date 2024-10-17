@@ -34,7 +34,6 @@ const solicitarNovoAgendamento = (req: Request, res: Response) => {
             res.send({ msg: "Not make requisition, " + value + " is undefined" }).status(406);
         }
     })
-
     //busca o modelo do cliente por id
     clienteModel.findByPk(requisicao.cliente_id).then(clienteObject => {
         //busca o modelo do servico por id
@@ -85,6 +84,10 @@ const solicitarNovoAgendamento = (req: Request, res: Response) => {
 const modificarAgendamento = (req: Request, res: Response) => {
 
 }
+
+const cancelarAgendamento = (req: Request, res: Response) => {
+
+}
 //TEste de envio de emails
 // app.get("/emailTest", (req: Request, res: Response) => {
 //     const host = process.env.SMTP_HOST;
@@ -96,4 +99,4 @@ const modificarAgendamento = (req: Request, res: Response) => {
 //     email.send(email.mailOptions("Carlosmaycon443@gmail.com", "Apenas mais um teste qualquer", "<h1>ISSO É UM EMAIL DE TESTE DO FBR DIGITAL</h1>"))
 // })
 
-export { solicitarNovoAgendamento };
+export { solicitarNovoAgendamento, modificarAgendamento, cancelarAgendamento };

@@ -11,6 +11,8 @@ import { sequelize } from "./models/dataBase";
 import clienteRouter from "./routes/cliente";
 import provedorRouter from "./routes/provedor"
 import agendamentoRouter from "./routes/agendamento"
+import servicoRouter from "./routes/servico";
+import administradorRouter from "./routes/administrador";
 //Importando classes 
 import { Email } from "./services/Email";
 //Iniciando a apliação
@@ -23,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 //Configuração de arquivos de renderização
 app.set("view engine", "ejs");
-app.set("views", join(__dirname, "/views"));
+app.set("views", join(__dirname, "/views")); 97
 
 //Configuração de arquivos estaticos
 app.use("/static", express.static(join(__dirname, "public")));
@@ -43,6 +45,8 @@ app.use(session({
 app.use("/cliente", clienteRouter);
 app.use("/provedor", provedorRouter);
 app.use("/agendamento", agendamentoRouter);
+app.use("/servico", servicoRouter);
+app.use("/adminitrador", administradorRouter);
 
 //Inicia o servidor
 app.listen(process.env.port, () => {

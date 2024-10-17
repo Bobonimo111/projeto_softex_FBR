@@ -47,3 +47,4 @@
 >Rota de agendamento em desenvolvimento, vou pular a etapa de verificar se os campos estão escritos de formas correta para poupar tempo.
 >
 >Rota para solicitar novo agendamento esta pronto agora preciso do banco para testar.
+![Fluxo para telas](Diario%20de%20desenvolvimento/Fluxo%20de%20telas.png)

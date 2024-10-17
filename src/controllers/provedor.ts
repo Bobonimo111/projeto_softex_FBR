@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import provedorModel from "../models/provedores"
 import bcrypt from "bcrypt";
 
