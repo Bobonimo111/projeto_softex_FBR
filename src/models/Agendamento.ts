@@ -19,16 +19,16 @@ interface AgendamentoAttributes {
 }
 
 class Agendamento extends Model<AgendamentoAttributes> implements AgendamentoAttributes {
-    public id!: bigint;
-    public data!: Date;
-    public hora!: string;
-    public servicoId!: bigint;
-    public clienteId!: bigint;
-    public provedorId!: bigint;
+    declare id: bigint;
+    declare data: Date;
+    declare hora: string;
+    declare servicoId: bigint;
+    declare clienteId: bigint;
+    declare provedorId: bigint;
 
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    // timestamps
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 Agendamento.init(
