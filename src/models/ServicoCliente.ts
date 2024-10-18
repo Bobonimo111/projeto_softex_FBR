@@ -10,13 +10,13 @@ interface ServicoClienteAttributes {
 }
 
 class ServicoCliente extends Model<ServicoClienteAttributes> implements ServicoClienteAttributes {
-    public id!: bigint;
-    public servicoId!: bigint;
-    public clienteId!: bigint;
+    declare id: bigint;
+    declare servicoId: bigint;
+    declare clienteId: bigint;
 
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    // timestamps
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 ServicoCliente.init(

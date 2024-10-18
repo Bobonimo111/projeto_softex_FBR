@@ -10,11 +10,11 @@ interface ServicoAttributes {
 }
 
 class Servico extends Model<ServicoAttributes> implements ServicoAttributes {
-    public id!: bigint;
-    public nome!: string;
-    public descricao!: string;
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    declare id: bigint;
+    declare nome: string;
+    declare descricao: string;
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 Servico.init(

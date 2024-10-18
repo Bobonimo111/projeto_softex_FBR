@@ -10,13 +10,13 @@ interface ProvedorServicoAttributes {
 }
 
 class ProvedorServico extends Model<ProvedorServicoAttributes> implements ProvedorServicoAttributes {
-    public id!: bigint;
-    public servicoId!: bigint;
-    public provedorId!: bigint;
+    declare id: bigint;
+    declare servicoId: bigint;
+    declare provedorId: bigint;
 
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    // timestamps
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 ProvedorServico.init(

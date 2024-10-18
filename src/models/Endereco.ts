@@ -15,19 +15,19 @@ interface EnderecoAttributes {
 }
 
 class Endereco extends Model<EnderecoAttributes> implements EnderecoAttributes {
-    public id!: bigint;
-    public telefone!: string;
-    public telefone2?: string;
-    public uf!: string;
-    public cidade!: string;
-    public bairro!: string;
-    public rua!: string;
-    public numero!: bigint;
-    public userId!: bigint;
+    declare id: bigint;
+    declare telefone: string;
+    declare telefone2?: string;
+    declare uf: string;
+    declare cidade: string;
+    declare bairro: string;
+    declare rua: string;
+    declare numero: bigint;
+    declare userId: bigint;
 
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    // timestamps
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 Endereco.init(

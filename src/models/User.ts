@@ -14,15 +14,15 @@ interface UserAttributes {
 }
 
 class User extends Model<UserAttributes> implements UserAttributes {
-    public nome!: string;
-    public cpf!: string;
-    public sexo!: string;
-    public email!: string;
-    public senha!: string;
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
-    public cnpj!: string;
-    public role!: 'cliente' | 'provedor' | 'administrador';
+    declare nome: string;
+    declare cpf: string;
+    declare sexo: string;
+    declare email: string;
+    declare senha: string;
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
+    declare cnpj: string;
+    declare role: 'cliente' | 'provedor' | 'administrador';
 }
 
 User.init(

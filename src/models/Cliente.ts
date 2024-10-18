@@ -8,12 +8,12 @@ interface ClienteAttributes {
 }
 
 class Cliente extends Model<ClienteAttributes> implements ClienteAttributes {
-    public id!: bigint;
-    public userId!: bigint;
+    declare id: bigint;
+    declare userId: bigint;
 
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    // timestamps
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 Cliente.init(

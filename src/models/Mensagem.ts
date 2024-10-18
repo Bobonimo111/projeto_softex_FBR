@@ -13,15 +13,15 @@ interface MensagemAttributes {
 }
 
 class Mensagem extends Model<MensagemAttributes> implements MensagemAttributes {
-    public id!: bigint;
-    public mensagem!: string;
-    public clienteId!: bigint;
-    public provedorId!: bigint;
-    public agendamentoId!: bigint;
+    declare id: bigint;
+    declare mensagem: string;
+    declare clienteId: bigint;
+    declare provedorId: bigint;
+    declare agendamentoId: bigint;
 
-    // timestamps!
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    // timestamps
+    declare readonly createdAt: Date;
+    declare readonly updatedAt: Date;
 }
 
 Mensagem.init(
