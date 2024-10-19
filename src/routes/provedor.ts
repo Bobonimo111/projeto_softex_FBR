@@ -9,12 +9,12 @@ import * as provedorController from "../controllers/provedor";
  * Retornar todos os provedores para FBR
  */
 
-//Definir get, post, com criptografia;
-/* DEFINIR MIDDLEARE OU SENHA PARA QUE APENAS UM ADM CONSIGA CRIAR UM PROVEDOR */
-router.post("/cadastro", logger.adm, provedorController.cadastro);
-
 /** DEFINIR PARA QUE O PROVEDOR CONSIGA ACESSAR A APARTIR DA SENHA DEFINIDA */
 router.post("/login", provedorController.login);
+
+/* DEFINIR MIDDLEARE OU SENHA PARA QUE APENAS UM ADM CONSIGA CRIAR UM PROVEDOR */
+router.post("/cadastro", provedorController.cadastro);
+
 
 //router.get("/test", logger.provedor, provedorController.test);
 export default router;

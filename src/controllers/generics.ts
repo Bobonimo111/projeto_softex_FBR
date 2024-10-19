@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-const login = function <UserModel>(req: Request, res: Response, requisicao: any, userModel: UserModel) {
+const login = function <UserModel>(req: Request, res: Response, requisicao: any, userModel: UserModel,) {
     Object.keys(requisicao).forEach((value) => {
         //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
         if (requisicao[value] == undefined || requisicao[value] == "" && value != "cnpj") {
@@ -12,7 +12,7 @@ const login = function <UserModel>(req: Request, res: Response, requisicao: any,
     userModel.findOne({
         where: {
             email: requisicao.email,
-            role: "cliente"
+            role: requisicao.rule
         }
     }).then(data => {
         //Se o email não for encontrado

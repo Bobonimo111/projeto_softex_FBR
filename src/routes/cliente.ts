@@ -3,9 +3,9 @@ import { Response, Request } from "express";
 const router = express.Router();
 import * as clienteController from "../controllers/cliente"
 
-router.post("make/login", clienteController.login);
+router.post("/login", clienteController.login);
 
-router.post("make/cadastro", clienteController.cadastro);
+router.post("/cadastro", clienteController.cadastro);
 
 router.get("/test", (req: Request, res: Response) => {
     res.render("user");

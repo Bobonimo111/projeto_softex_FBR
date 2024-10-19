@@ -48,3 +48,17 @@
 >
 >Rota para solicitar novo agendamento esta pronto agora preciso do banco para testar.
 ![Fluxo para telas](Diario%20de%20desenvolvimento/Fluxo%20de%20telas.png)
+
+### 18/10/2024
+>
+>Ontem foram aplicadas os modelos do banco dados no codigo, implementei todos que foram enviado a mim por antonio.
+>
+>Hoje estou fazendo a refatoração das rotas, para suportar os modelos
+>
+>Vou desenvolver uma função generica pra login e cadastro de administrador, provedor e cliente
+>Função generica finalizada proximo passo passa ser,
+
+- O crud para os serviços;
+- Requisição de agendamentos;
+- Reposta de agendamento;
+- Retorno do cronograma para o fornecedor e visualização para o cliente;

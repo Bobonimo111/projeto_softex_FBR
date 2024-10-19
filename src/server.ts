@@ -46,7 +46,7 @@ app.use("/cliente", clienteRouter);
 app.use("/provedor", provedorRouter);
 app.use("/agendamento", agendamentoRouter);
 app.use("/servico", servicoRouter);
-app.use("/adminitrador", administradorRouter);
+app.use("/administrador", administradorRouter);
 
 //Inicia o servidor
 app.listen(process.env.port, () => {
@@ -54,7 +54,8 @@ app.listen(process.env.port, () => {
     sequelize.authenticate()
         .then(() => {
             console.log('Conexão com o banco de dados estabelecida com sucesso.');
-            return sequelize.sync({ force: true }); // Sincroniza os modelos
+            sequelize.drop();
+            return sequelize.sync(); // Sincroniza os modelos
         })
         .then(() => {
             console.log('Modelos sincronizados com o banco de dados.');
