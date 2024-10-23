@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
+//import { createReadStream } from "fs";
+import { Op } from "sequelize";
 import servicoModel from "../models/Servico";
 import ProvedorServicoModel from "../models/ProvedorServico"
+
 const create = (req: Request, res: Response) => {
     const requisicao = {
         nome: req.body.nome,
         descricao: req.body.descricao,
-        servicoId: req.body.servicoId,
         provedorId: req.body.provedorId
     };
     Object.keys(requisicao).forEach((value) => {
@@ -51,17 +53,193 @@ const create = (req: Request, res: Response) => {
             res.send(err).status(502)
         })
 }
-const get = (req: Request, res: Response) => {
+const getById = (req: Request, res: Response) => {
+    //A requisição mista com body sendo o id de provedor, e a querry sendo o id de servico
+    //Requisição do tipo body por meio do provedor
+    const requisicao = {
+        provedorId: req.body.provedorId,
+        servicoId: req.params.servicoId
+    }
+    //Adicionar os catches de ERRO e O else de undefined se não encontrados
+    ProvedorServicoModel
+        .findAll(
+            {
+                where:
+                {
+                    provedorId: requisicao.provedorId
+                }
+            })
+        .then(ProvedorServicoDataRequest => {
+            if (ProvedorServicoDataRequest == undefined) {
+                //provedor não encontrado
+                res.setHeader("content-type", "application/json")
 
+                res.send({ msg: "Provedor não encontrado no banco de dados" }).status(406).end();
+            } else {
+                let isServicoId = ProvedorServicoDataRequest.some(obj => obj.id == requisicao.servicoId);
+                //O serviço esta presente no sistema daquele fornecedor
+                if (isServicoId) {
+                    servicoModel.findByPk(requisicao.servicoId).then(ServicoDataRequest => {
+                        if (ServicoDataRequest == undefined) {
+                            res.setHeader("content-type", "application/json");
+                            res.send({ msg: "serviço não encontrado" }).status(204).end();
+                        } else {
+                            res.send(ServicoDataRequest).status(200).end();
+                        }
+                    })
+                    //O serviço não esta presente
+                } else {
+                    res.setHeader("content-type", "application/json");
+                    res.send({ msg: "serviço não encontrado" }).status(204).end();
+                }
+            }
+        })
 }
 const getAll = (req: Request, res: Response) => {
+    //Requisição do tipo body em que sera puxado todos ps seviços do provedor
+    const requisicao = {
+        provedorId: req.body.provedorId
+    }
+    //Adicionar os catches de ERRO e O else de undefined se não encontrados
+    ProvedorServicoModel
+        .findAll(
+            {
+                where:
+                {
+                    provedorId: requisicao.provedorId
+                }
+            })
+        .then(ProvedorServicoDataRequest => {
+            if (ProvedorServicoDataRequest == undefined) {
+                //provedor não encontrado
+                res.send({ msg: "Provedor não encontrado" }).status(406).end();
+            } else {
+                res.setHeader('Content-Type', 'text/plain');
+                let id = ProvedorServicoDataRequest.map(obj => obj.servicoId);
+                servicoModel.findAll({
+                    where: {
+                        id: {
+                            [Op.in]: id
+                        }
+                    }
+                })
+                    .then(ServicoDataRequest => {
+                        if (ServicoDataRequest == undefined) {
+                            res.send({ msg: "Nenhum serviço encontrado" }).status(204).end();
+                        } else {
 
+                        }
+                        res.send(ServicoDataRequest).end();
+                    })
+            }
+        })
 }
 const update = (req: Request, res: Response) => {
+    //A requisição mista com body sendo o id de provedor, e a querry sendo o id de servico
+    //Requisição do tipo body por meio do provedor
+    //ENVIA UMA REQUISIÇÃO DO TIPO PUT
+    //PRECISA DE UM BODY COM A DESCRIÇÃO,NOME,PROVEDORID E SERVICOID;
+    //SE O NOME OU A DESCRIÇÃO ESTIVEREM VAZIAS, VAI SER MANTIDO O VALOR ATUAL NO DB;
+    let requisicao = {
+        nome: req.body.nome,
+        descricao: req.body.descricao,
+        provedorId: req.body.provedorId,
+        servicoId: req.body.servicoId
+    }
+    //Adicionar os catches de ERRO e O else de undefined se não encontrados
+    ProvedorServicoModel
+        .findAll(
+            {
+                where:
+                {
+                    provedorId: requisicao.provedorId
+                }
+            })
+        .then(ProvedorServicoDataRequest => {
+            if (ProvedorServicoDataRequest == undefined) {
+                //provedor não encontrado
+                res.setHeader("content-type", "application/json")
 
+                res.send({ msg: "Provedor não encontrado no banco de dados" }).status(406).end();
+            } else {
+                let isServicoId = ProvedorServicoDataRequest.some(obj => obj.id == requisicao.servicoId);
+                //O serviço esta presente no sistema daquele fornecedor
+                if (isServicoId) {
+                    servicoModel.findByPk(requisicao.servicoId).then(ServicoDataRequest => {
+                        if (ServicoDataRequest == undefined) {
+                            res.setHeader("content-type", "application/json");
+                            res.send({ msg: "serviço não encontrado" }).status(204).end();
+                        } else {
+                            ServicoDataRequest.descricao = requisicao.descricao == undefined || requisicao.descricao == "" ? ServicoDataRequest.descricao : requisicao.descricao;
+                            ServicoDataRequest.nome = requisicao.nome == undefined || requisicao.nome == "" ? ServicoDataRequest.nome : requisicao.nome;
+
+                            res.send({ msg: "Servico atualizado" }).status(200).end();
+                            //res.send(ServicoDataRequest)
+                            return ServicoDataRequest.save();
+
+
+                        }
+                    })
+                    //O serviço não esta presente
+                } else {
+                    res.setHeader("content-type", "application/json");
+
+                    res.send({ msg: "serviço não encontrado" }).status(204).end();
+                }
+            }
+        })
 }
 const remove = (req: Request, res: Response) => {
+    //REMOVE UMA ROW DO BD DE SERVICOS, USANDO UMA REQUISIÇÃO DELETE, MAS O ENVIO DEVE SER FEITO COM VALORES EM BODY, 
+    //SENDO O PROVEDOR A QUEM PERTENCE O SERVIÇO E O SERVIÇO A SER DELETADO
+    const requisicao = {
+        provedorId: req.body.provedorId,
+        servicoId: req.body.servicoId
+    }
+    //Adicionar os catches de ERRO e O else de undefined se não encontrados
+    ProvedorServicoModel
+        .findAll(
+            {
+                where:
+                {
+                    provedorId: requisicao.provedorId
+                }
+            })
+        .then(ProvedorServicoDataRequest => {
+            if (ProvedorServicoDataRequest == undefined) {
+                //provedor não encontrado
+                res.setHeader("content-type", "application/json")
 
+                res.send({ msg: "Provedor não encontrado no banco de dados" }).status(406).end();
+            } else {
+                let isServicoId = ProvedorServicoDataRequest.some(obj => obj.id == requisicao.servicoId);
+                //O serviço esta presente no sistema daquele fornecedor
+                if (isServicoId) {
+                    //Remoção do banco de dados "intermediario" para não se ter um erro de referencias.
+                    ProvedorServicoModel.destroy({
+                        where: {
+                            provedorId: requisicao.provedorId,
+                            servicoId: requisicao.servicoId,
+                        }
+                    })
+                    //Remoção do serviço do banco de dados, original.
+                    servicoModel.findByPk(requisicao.servicoId).then(ServicoDataRequest => {
+                        if (ServicoDataRequest == undefined) {
+                            res.setHeader("content-type", "application/json");
+                            res.send({ msg: "serviço não encontrado" }).status(204).end();
+                        } else {
+                            res.send({ msg: "o serviço foi removido do banco de dados" }).status(200).end();
+                            return ServicoDataRequest.destroy();
+                        }
+                    })
+                    //O serviço não esta presente
+                } else {
+                    res.setHeader("content-type", "application/json");
+
+                    res.send({ msg: "serviço não encontrado" }).status(204).end();
+                }
+            }
+        })
 }
 
-export { create, get, getAll, update, remove };
+export { create, getById, getAll, update, remove };

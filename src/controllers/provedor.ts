@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import provedorModel from "../models/Provedor"
 import userModel from "../models/User";
-import bcrypt from "bcrypt";
 import * as generics from "./generics"
 
 
