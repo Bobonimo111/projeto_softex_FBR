@@ -165,21 +165,22 @@ const update = (req: Request, res: Response) => {
                 let isServicoId = ProvedorServicoDataRequest.some(obj => obj.id == requisicao.servicoId);
                 //O serviço esta presente no sistema daquele fornecedor
                 if (isServicoId) {
-                    servicoModel.findByPk(requisicao.servicoId).then(ServicoDataRequest => {
-                        if (ServicoDataRequest == undefined) {
-                            res.setHeader("content-type", "application/json");
-                            res.send({ msg: "serviço não encontrado" }).status(204).end();
-                        } else {
-                            ServicoDataRequest.descricao = requisicao.descricao == undefined || requisicao.descricao == "" ? ServicoDataRequest.descricao : requisicao.descricao;
-                            ServicoDataRequest.nome = requisicao.nome == undefined || requisicao.nome == "" ? ServicoDataRequest.nome : requisicao.nome;
+                    servicoModel.findByPk(requisicao.servicoId)
+                        .then(ServicoDataRequest => {
+                            if (ServicoDataRequest == undefined) {
+                                res.setHeader("content-type", "application/json");
+                                res.send({ msg: "serviço não encontrado" }).status(204).end();
+                            } else {
+                                ServicoDataRequest.descricao = requisicao.descricao == undefined || requisicao.descricao == "" ? ServicoDataRequest.descricao : requisicao.descricao;
+                                ServicoDataRequest.nome = requisicao.nome == undefined || requisicao.nome == "" ? ServicoDataRequest.nome : requisicao.nome;
 
-                            res.send({ msg: "Servico atualizado" }).status(200).end();
-                            //res.send(ServicoDataRequest)
-                            return ServicoDataRequest.save();
+                                res.send({ msg: "Servico atualizado" }).status(200).end();
+                                //res.send(ServicoDataRequest)
+                                return ServicoDataRequest.save();
 
 
-                        }
-                    })
+                            }
+                        })
                     //O serviço não esta presente
                 } else {
                     res.setHeader("content-type", "application/json");

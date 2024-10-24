@@ -53,6 +53,20 @@ class Email {
             html: html // Alternativamente, conteúdo em HTML
         }
     }
+    public templateNovaRequisicao() {
+        let template: String = `<h1>{Provedor} você possui uma nova requisição</h1>
+<hr>
+<div>
+    <ul>
+        <li>Serviço : {Serviço} </li>
+        <li>Data : {Data} </li>
+        <li>Hora : {Hora} </li>
+    </ul>
+<hr>
+<p style="font-size:15px;color:red;">Clique no botão abaixo para confirmar sugerir alterações</p>
+<a href=""><button>CONFIRMAR</button></a>
+</div>`
+    }
 
     public send(mailOptions: IEmail) {
         this.trasporter.sendMail(mailOptions)

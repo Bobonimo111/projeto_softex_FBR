@@ -62,3 +62,7 @@
 - Requisição de agendamentos;
 - Reposta de agendamento;
 - Retorno do cronograma para o fornecedor e visualização para o cliente;
+
+### 23/10/2024
+>Hoje finalizei o crud de serviços, sei que não é uma boa pratica fazer um commit desse tamanho, mas foi oq deu pra fazer agora;
+>Agora vou pra parte de agendamentos, tenho de pensar em como vai funcionar a logica e os dados que seram envolvidos;

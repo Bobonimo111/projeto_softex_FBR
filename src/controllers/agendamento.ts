@@ -3,6 +3,7 @@ import { Email } from "../services/Email";
 import clienteModel from "../models/Cliente"
 import provedorModel from "../models/Provedor"
 import ServicoModel from "../models/Servico"
+import agendamentoModel from "../models/Agendamento"
 /**
  * Rota para criar novo agendamento post 
  * Rota para editar agendamento put
@@ -20,68 +21,54 @@ import ServicoModel from "../models/Servico"
 
 const solicitarNovoAgendamento = (req: Request, res: Response) => {
     const requisicao = {
-        time: req.body.time,
-        date: req.body.date,
-        descricao: req.body.descricao,
-        service_id: req.body.service_id,
-        cliente_id: req.body.cliente_id
+        hora: req.body.hora,
+        data: req.body.data,
+        servicoId: req.body.servicoId,
+        clienteId: req.body.clienteId,
+        provedorId: req.body.provedorId
     }
     //Conferir se todos os campos estão preenchidos
     Object.keys(requisicao).forEach((value) => {
         //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
-        if (requisicao[value] == undefined || requisicao[value] == "" && value != "descricao") {
+        if (requisicao[value] == undefined || requisicao[value] == "") {
             res.setHeader("content-type", "application/json")
             res.send({ msg: "Not make requisition, " + value + " is undefined" }).status(406);
         }
     })
-    //busca o modelo do cliente por id
-    clienteModel.findByPk(requisicao.cliente_id).then(clienteObject => {
-        //busca o modelo do servico por id
-        ServicoModel.findByPk(requisicao.service_id).then(servicoObject => {
-            //busca o modelo do provedor por id
-            provedorModel.findByPk(servicoObject.provedor_id).then(provedorObject => {
-                /**
-* Estrutura de EMAIL
-* {Cliente nome } entra em contato com você solicitando agendamento:
-* ----------------
-* {Serviço}
-* {Data e hora}
-* {Descrição extra se existir}
-* {Botão Para responder}
-* Não responda esse email, é um email automatico;
-*/
-                let template: string = `
-            <h1>${clienteObject.name} entra em contato solicitando agendamento</h1>
-            <hr>
-            <p>
-                Serviço :${servicoObject.name}
-                Data: ${requisicao.date}
-                Hora: ${requisicao.time}
-                Descrição:${requisicao.descricao != undefined ? requisicao.descricao : ""}
-                <form method="GET">
-                    <input type="submit" value="RESPONDER">
-                </form>
-                <hr>
-            </p>
-                                   `;
-                const host = process.env.SMTP_HOST;
-                const pass = process.env.SMTP_PASS;
-                const user = process.env.SMTP_USER;
-                const email = new Email(user, pass, host);
-                email.init();
-                email.send(email.mailOptions(provedorObject?.email, "Ocorreu um erro na visualização", template))
-                res.send({ msg: requisicao }).status(200);
-
-            })
+    agendamentoModel.create(requisicao)
+        .then(dataCreateAgendamento => {
+            if (dataCreateAgendamento == undefined) {
+                res.setHeader("content-type", "application/json")
+                res.send({ msg: "agendamento not create" }).status(204);
+            } else {
+                res.setHeader("content-type", "application/json")
+                res.send({
+                    msg: "created",
+                    data: dataCreateAgendamento
+                }).status(201);
+            }
+        }).catch(dataError => {
+            res.send(dataError).status(500)
         })
-    })
 }
 //NOTA: ESSA CAMPO DEVE RECEBER UM ID
-//ESSE ID É REFERENTE AO AGEDAMENTO, ESSE ID DEVE VIR POR MEIO DE QUERRY
-//SE NADA TUDO QUE VIER POR MEIO DO BODY FOR IGUAL AO ID DO AGENDAMENTO
-//O STATUS DO AGENDAMENTO DEVE SER MODIFICADO PARA APROVADO ENVIANDO UM EMAIL PARA O
-//CLIENTE QUE FEZ A REQUISIÇÃO.
+//ESSA ROTA DEVE SER ACESSADA APENAS POR UMA ROTA DE RESPOSTA
+//ESSA PAGINA DEVE CONTER O ID DO AGENDAMENTO, PARA CARREGAR O MESMO
 const modificarAgendamento = (req: Request, res: Response) => {
+    const requisicao = {
+        data: req.body.data,
+        hora: req.body.hora,
+        id: req.body.agendamentoId,
+    }
+    agendamentoModel.findByPk(requisicao.id)
+        //Terminar isso aqui
+        .then(AgendamentoDataRequest => {
+            if (AgendamentoDataRequest == undefined) {
+                //Retorno de agendamento não existe no banco de dados
+            } else {
+                AgendamentoDataRequest.data = AgendamentoDataRequest.data == requisicao.data || AgendamentoDataRequest.data == undefined ? AgendamentoDataRequest.data : requisicao.data
+            }
+        })
 
 }
 
