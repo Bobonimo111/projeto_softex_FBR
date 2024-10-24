@@ -53,20 +53,28 @@ class Email {
             html: html // Alternativamente, conteúdo em HTML
         }
     }
-    public templateNovaRequisicao() {
-        let template: String = `<h1>{Provedor} você possui uma nova requisição</h1>
-<hr>
+    public templateNovaRequisicao(provedor: String, servico: String, data: String, hora: String) {
+        let htmlTemplate: String =
+            `<h1>${provedor} você possui uma nova requisição</h1>
+        <hr>
 <div>
     <ul>
-        <li>Serviço : {Serviço} </li>
-        <li>Data : {Data} </li>
-        <li>Hora : {Hora} </li>
+        <li>Serviço : ${servico} </li>
+        <li>Data : ${data} </li>
+        <li>Hora : ${hora} </li>
     </ul>
 <hr>
 <p style="font-size:15px;color:red;">Clique no botão abaixo para confirmar sugerir alterações</p>
 <a href=""><button>CONFIRMAR</button></a>
 </div>`
+        let plainText: String = `${provedor} você possui uma nova requisição, Serviço : ${servico}, Data : ${data}, Hora : ${hora}`
+
+        return {
+            htmlTemplate: htmlTemplate,
+            plainText: plainText
+        }
     }
+
 
     public send(mailOptions: IEmail) {
         this.trasporter.sendMail(mailOptions)
