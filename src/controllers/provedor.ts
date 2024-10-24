@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import provedorModel from "../models/Provedor"
 import userModel from "../models/User";
+import ProvedorServico from "../models/ProvedorServico";
 import * as generics from "./generics"
 
 
@@ -26,10 +27,39 @@ function cadastro(req: Request, res: Response) {
     generics.cadastro(req, res, requisicao, userModel, provedorModel)
 };
 
+function getByServiceId(req: Request, res: Response) {
+    const request = {
+        servicoId: req.body.servicoId
+    }
+    ProvedorServico.findOne({
+        where: {
+            servicoId: request.servicoId
+        }
+    }).then(ProvedorServicoDataRequest => {
+        if (ProvedorServicoDataRequest == undefined) {
+            res.header("content-type", "json/application");
+            res.send({ msg: "Provider not found" }).status(204)
+        } else {
+            provedorModel.findByPk(ProvedorServicoDataRequest.provedorId)
+                .then(ProvedorDataRequest => {
+                    if (ProvedorDataRequest == undefined) {
+                        res.header("content-type", "json/application");
+                        res.send({ msg: "Provider not found" }).status(204)
+                    } else {
+                        res.header("content-type", "json/application");
+                        res.send(ProvedorDataRequest).status(204)
+                    }
+                })
+        }
+    })
+
+
+}
+
 /*MID FUNCIONA*/
 // function test(req: Request, res: Response) {
 //     console.log("Middleware funcionando")
 //     res.send("ENTROU COM MID")
 // }
 
-export { login, cadastro };
+export { login, cadastro, getByServiceId };

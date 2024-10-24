@@ -4,6 +4,7 @@ import clienteModel from "../models/Cliente"
 import provedorModel from "../models/Provedor"
 import ServicoModel from "../models/Servico"
 import agendamentoModel from "../models/Agendamento"
+import axios from "axios";
 /**
  * Rota para criar novo agendamento post 
  * Rota para editar agendamento put
@@ -19,7 +20,7 @@ import agendamentoModel from "../models/Agendamento"
  */
 
 
-const solicitarNovoAgendamento = (req: Request, res: Response) => {
+const solicitarNovoAgendamento = async (req: Request, res: Response) => {
     const requisicao = {
         hora: req.body.hora,
         data: req.body.data,
@@ -41,14 +42,20 @@ const solicitarNovoAgendamento = (req: Request, res: Response) => {
                 res.setHeader("content-type", "application/json")
                 res.send({ msg: "agendamento not create" }).status(204);
             } else {
-                //criando Objeto email
-                let email: Email = new Email(process.env.SMTP_USER, process.env.SMTP_PASS, process.env.SMTP_HOST);
-                email.init()
-                res.setHeader("content-type", "application/json")
-                res.send({
-                    msg: "created",
-                    data: dataCreateAgendamento
-                }).status(201);
+                try {
+                    //Iniciar a serie de requisições internas para coletar os dados para a requisição por email
+                    const ProvedorDataRequestAxios = axios.get(`http://localhost:${process.env.port}/`)
+                    res.setHeader("content-type", "application/json")
+                    res.send({
+                        msg: "created",
+                        data: dataCreateAgendamento
+                    }).status(201);
+
+
+                } catch (ex: any) {
+                    res.send({ msg: "Not possible to crate a requisition" }).status(500)
+                }
+
             }
         }).catch(dataError => {
             res.send(dataError).status(500)

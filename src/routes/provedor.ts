@@ -15,6 +15,8 @@ router.post("/login", provedorController.login);
 /* DEFINIR MIDDLEARE OU SENHA PARA QUE APENAS UM ADM CONSIGA CRIAR UM PROVEDOR */
 router.post("/cadastro", provedorController.cadastro);
 
+/* Passo o id de um serviço e ele retorna os dados do provedor responsavel */
+router.get("/getByServiceId", provedorController.getByServiceId)
 
 //router.get("/test", logger.provedor, provedorController.test);
 export default router;
