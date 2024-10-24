@@ -16,7 +16,7 @@ router.post("/login", provedorController.login);
 router.post("/cadastro", provedorController.cadastro);
 
 /* Passo o id de um serviço e ele retorna os dados do provedor responsavel */
-router.get("/getByServiceId", provedorController.getByServiceId)
+router.get("/getByServiceId/:servicoId", provedorController.getByServiceId)
 
 //router.get("/test", logger.provedor, provedorController.test);
 export default router;

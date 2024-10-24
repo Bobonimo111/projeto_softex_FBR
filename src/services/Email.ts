@@ -53,6 +53,7 @@ class Email {
             html: html // Alternativamente, conteúdo em HTML
         }
     }
+
     public templateNovaRequisicao(provedor: String, servico: String, data: String, hora: String) {
         let htmlTemplate: String =
             `<h1>${provedor} você possui uma nova requisição</h1>

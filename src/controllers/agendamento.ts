@@ -26,7 +26,6 @@ const solicitarNovoAgendamento = async (req: Request, res: Response) => {
         data: req.body.data,
         servicoId: req.body.servicoId,
         clienteId: req.body.clienteId,
-        provedorId: req.body.provedorId
     }
     //Conferir se todos os campos estão preenchidos
     Object.keys(requisicao).forEach((value) => {
@@ -44,7 +43,7 @@ const solicitarNovoAgendamento = async (req: Request, res: Response) => {
             } else {
                 try {
                     //Iniciar a serie de requisições internas para coletar os dados para a requisição por email
-                    const ProvedorDataRequestAxios = axios.get(`http://localhost:${process.env.port}/`)
+                    const ProvedorDataRequestAxios = axios.get(`http://localhost:${process.env.port}/provedor/getbyserviceid/${requisicao.servicoId}`)
                     res.setHeader("content-type", "application/json")
                     res.send({
                         msg: "created",

@@ -29,7 +29,7 @@ function cadastro(req: Request, res: Response) {
 
 function getByServiceId(req: Request, res: Response) {
     const request = {
-        servicoId: req.body.servicoId
+        servicoId: req.params.servicoId
     }
     ProvedorServico.findOne({
         where: {
@@ -46,8 +46,16 @@ function getByServiceId(req: Request, res: Response) {
                         res.header("content-type", "json/application");
                         res.send({ msg: "Provider not found" }).status(204)
                     } else {
-                        res.header("content-type", "json/application");
-                        res.send(ProvedorDataRequest).status(204)
+                        userModel.findByPk(ProvedorDataRequest.userId)
+                            .then(userDataRequest => {
+                                if (userDataRequest == undefined) {
+                                    res.header("content-type", "json/application");
+                                    res.send({ msg: "Provider not found" }).status(204)
+                                } else {
+                                    res.header("content-type", "json/application");
+                                    res.send(userDataRequest)
+                                }
+                            })
                     }
                 })
         }
