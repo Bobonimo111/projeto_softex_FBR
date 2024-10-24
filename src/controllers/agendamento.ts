@@ -41,6 +41,9 @@ const solicitarNovoAgendamento = (req: Request, res: Response) => {
                 res.setHeader("content-type", "application/json")
                 res.send({ msg: "agendamento not create" }).status(204);
             } else {
+                //criando Objeto email
+                let email: Email = new Email(process.env.SMTP_USER, process.env.SMTP_PASS, process.env.SMTP_HOST);
+                email.init()
                 res.setHeader("content-type", "application/json")
                 res.send({
                     msg: "created",
