@@ -2,37 +2,51 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
 const login = function <UserModel>(req: Request, res: Response, requisicao: any, userModel: UserModel,) {
+    try {
+        Object.keys(requisicao).forEach((value) => {
+            //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
 
-    Object.keys(requisicao).forEach((value) => {
-        //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
-        if (requisicao[value] == undefined || requisicao[value] == "" && value != "cnpj") {
-            res.setHeader("content-type", "application/json")
-            res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(406).end();
-        }
-    })
-    userModel.findOne({
-        where: {
-            email: requisicao.email,
-            role: requisicao.rule
-        }
-    }).then(data => {
-        //Se o email não for encontrado
-        if (data) {
-            // console.log(data) 
-            if (bcrypt.compareSync(requisicao.senha, data.senha)) {
-                //ADICIONAR A SESSÃO
-                res.setHeader("content-type", "application/json");
-                res.send({ msg: "USER LOGGED" }).status(200);
+            if (requisicao[value] == undefined || requisicao[value] == "") {
+                res.setHeader("content-type", "application/json")
+                res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(406).end();
+            }
+        })
+
+        userModel.findOne({
+            where: {
+                email: requisicao.email,
+                role: requisicao.rule
+            }
+        }).then(data => {
+            //Se o email não for encontrado
+            if (data) {
+                // console.log(data) 
+                if (bcrypt.compareSync(requisicao.senha, data.senha)) {
+                    //ADICIONAR A SESSÃO
+                    res.setHeader("content-type", "application/json");
+                    //A DEPENDER DA UTILIZAÇÃO INVERTER 
+                    // res.send({ msg: "USER LOGGED" }).status(200);
+                    req.session.user = {
+                        id: data.id,
+                        role: data.role
+                    }
+                    console.log(req.session.user)
+                    res.redirect("/agendamento");
+                } else {
+                    res.setHeader("content-type", "application/json");
+                    res.send({ msg: "PASS INVALID" }).status(200);
+                }
             } else {
                 res.setHeader("content-type", "application/json");
-                res.send({ msg: "PASS INVALID" }).status(200);
+                res.send({ msg: "USER NOT FOUND" }).status(400);
             }
-        } else {
-            res.setHeader("content-type", "application/json");
-            res.send({ msg: "USER NOT FOUND" }).status(400);
-        }
-    })
+        })
 
+    }
+    catch (err) {
+        res.setHeader("content-type", "application/json");
+        res.send({ msg: "OCORREU ALGUM ERRO PREENCHA TODOS OS CAMPOS" }).status(406);
+    }
 }
 
 const cadastro = function <UserModel, RoleModel>(req: Request, res: Response, requisicao: any, userModel: UserModel, roleModel: RoleModel) {

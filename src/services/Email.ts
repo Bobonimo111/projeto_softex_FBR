@@ -91,6 +91,15 @@ class Email {
 }
 
 export { Email }
+
+
+// let email: Email = new Email("MS_FQs8rN@trial-pq3enl6m13rg2vwr.mlsender.net", "9joEW9pkxH7bG0dW", "smtp.mailersend.net")
+// email.init();
+// let templates = email.templateNovaRequisicao("Pintores", "pintar uma parede", "2024-12-08", "14:30");
+// let mailOptions = email.mailOptions("test-8sub5ahwq@srv1.mail-tester.com", "Um Novo serviço", templates.htmlTemplate, templates.plainText);
+// email.send(mailOptions);
+
+
 // export const enviar = function (login: String | undefined, pass: String | undefined) {
 
 //     const transporter: any =

@@ -13,6 +13,7 @@ import provedorRouter from "./routes/provedor"
 import agendamentoRouter from "./routes/agendamento"
 import servicoRouter from "./routes/servico";
 import administradorRouter from "./routes/administrador";
+import viewRouter from "./routes/views";
 //Importando classes 
 import { Email } from "./services/Email";
 //Iniciando a apliação
@@ -42,6 +43,7 @@ app.use(session({
 }));
 
 //Configuração de rotas
+app.use("", viewRouter);
 app.use("/cliente", clienteRouter);
 app.use("/provedor", provedorRouter);
 app.use("/agendamento", agendamentoRouter);
@@ -54,7 +56,7 @@ app.listen(process.env.port, () => {
     sequelize.authenticate()
         .then(() => {
             console.log('Conexão com o banco de dados estabelecida com sucesso.');
-            return sequelize.sync({ force: true }); // Sincroniza os modelos
+            return sequelize.sync({ force: false }); // Sincroniza os modelos
         })
         .then(() => {
             console.log('Modelos sincronizados com o banco de dados.');

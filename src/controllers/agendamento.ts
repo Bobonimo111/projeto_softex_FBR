@@ -30,6 +30,7 @@ const solicitarNovoAgendamento = async (req: Request, res: Response) => {
         servicoId: req.body.servicoId,
         clienteId: req.body.clienteId,
     }
+    console.log(requisicao)
     //Conferir se todos os campos estão preenchidos
     Object.keys(requisicao).forEach((value) => {
         //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
