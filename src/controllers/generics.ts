@@ -2,11 +2,12 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
 const login = function <UserModel>(req: Request, res: Response, requisicao: any, userModel: UserModel,) {
+
     Object.keys(requisicao).forEach((value) => {
         //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
         if (requisicao[value] == undefined || requisicao[value] == "" && value != "cnpj") {
             res.setHeader("content-type", "application/json")
-            res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(406);
+            res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(406).end();
         }
     })
     userModel.findOne({

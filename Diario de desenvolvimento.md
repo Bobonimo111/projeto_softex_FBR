@@ -64,5 +64,11 @@
 - Retorno do cronograma para o fornecedor e visualização para o cliente;
 
 ### 23/10/2024
+>
 >Hoje finalizei o crud de serviços, sei que não é uma boa pratica fazer um commit desse tamanho, mas foi oq deu pra fazer agora;
 >Agora vou pra parte de agendamentos, tenho de pensar em como vai funcionar a logica e os dados que seram envolvidos;
+
+### 27/10/2024
+>
+>Nesse meio tempo iniciei a parte de agendamentos, tive alguns contra tempo com a questão do banco de dados, o projeto já perdeu a infraestrutura a muito tempo e tenho até dia 30, entregar uma parte do projeto funcionando.
+>Vou finalizar hoje a questão de agendamentos e realizar um mapeamento nas rotas

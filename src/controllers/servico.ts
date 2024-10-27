@@ -4,6 +4,46 @@ import { Op } from "sequelize";
 import servicoModel from "../models/Servico";
 import ProvedorServicoModel from "../models/ProvedorServico"
 
+//Retornar um model de todos os serviços junto ao id de seu provedor
+// const ServicosComIdsDosProvedores = () => {
+//     return servicoModel.findAll().then(servicoDataRequest => {
+//         ProvedorServicoModel.findAll().then((provedorServicoDataRequest) => {
+//             let novoRetorno = []
+//             servicoDataRequest.forEach(dataExterno => {
+//                 provedorServicoDataRequest.forEach(dataInterno => {
+//                     if (dataExterno.id == dataInterno.servicoId) {
+//                         novoRetorno.push(dataExterno["provedorId"] = dataInterno.provedorId)
+//                     }
+//                 })
+//             })
+//             return novoRetorno;
+//         })
+//     })
+// }
+const ServicosComIdsDosProvedores = async () => {
+    try {
+        const servicoDataRequest = await servicoModel.findAll();
+        const provedorServicoDataRequest = await ProvedorServicoModel.findAll();
+
+        const novoRetorno = [];
+
+        servicoDataRequest.forEach(dataExterno => {
+            provedorServicoDataRequest.forEach(dataInterno => {
+                if (dataExterno.id === dataInterno.servicoId) {
+                    let dataExternoJson = dataExterno.toJSON();
+                    dataExternoJson.provedorId = dataInterno.provedorId; // Adiciona provedorId ao dataExterno
+                    novoRetorno.push(dataExternoJson); // Adiciona dataExterno ao array
+                }
+            });
+        });
+
+        return novoRetorno;
+    } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+        throw error;
+    }
+};
+
 const create = (req: Request, res: Response) => {
     const requisicao = {
         nome: req.body.nome,
@@ -129,6 +169,7 @@ const getAll = (req: Request, res: Response) => {
                         } else {
 
                         }
+
                         res.send(ServicoDataRequest).end();
                     })
             }
@@ -242,5 +283,9 @@ const remove = (req: Request, res: Response) => {
             }
         })
 }
-
-export { create, getById, getAll, update, remove };
+const teste = async (req: Request, res: Response) => {
+    res.header("content-type", "json/application")
+    const retorno = await ServicosComIdsDosProvedores();
+    res.send(retorno).status(200)
+}
+export { create, getById, getAll, update, remove, teste, ServicosComIdsDosProvedores };

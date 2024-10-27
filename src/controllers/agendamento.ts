@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 import { Email } from "../services/Email";
 import clienteModel from "../models/Cliente"
+import userModel from "../models/User"
 import provedorModel from "../models/Provedor"
 import ServicoModel from "../models/Servico"
 import agendamentoModel from "../models/Agendamento"
-import axios from "axios";
+import { ServicosComIdsDosProvedores } from "./servico";
+import ProvedorServicoModel from "../models/ProvedorServico";
+// import axios from "axios";
 /**
  * Rota para criar novo agendamento post 
  * Rota para editar agendamento put
@@ -21,7 +24,7 @@ import axios from "axios";
 
 
 const solicitarNovoAgendamento = async (req: Request, res: Response) => {
-    const requisicao = {
+    let requisicao = {
         hora: req.body.hora,
         data: req.body.data,
         servicoId: req.body.servicoId,
@@ -35,30 +38,30 @@ const solicitarNovoAgendamento = async (req: Request, res: Response) => {
             res.send({ msg: "Not make requisition, " + value + " is undefined" }).status(406);
         }
     })
-    agendamentoModel.create(requisicao)
-        .then(dataCreateAgendamento => {
-            if (dataCreateAgendamento == undefined) {
-                res.setHeader("content-type", "application/json")
-                res.send({ msg: "agendamento not create" }).status(204);
-            } else {
-                try {
-                    //Iniciar a serie de requisições internas para coletar os dados para a requisição por email
-                    const ProvedorDataRequestAxios = axios.get(`http://localhost:${process.env.port}/provedor/getbyserviceid/${requisicao.servicoId}`)
-                    res.setHeader("content-type", "application/json")
-                    res.send({
-                        msg: "created",
-                        data: dataCreateAgendamento
-                    }).status(201);
-
-
-                } catch (ex: any) {
-                    res.send({ msg: "Not possible to crate a requisition" }).status(500)
-                }
-
-            }
-        }).catch(dataError => {
-            res.send(dataError).status(500)
-        })
+    const servicoIntermediario = await ProvedorServicoModel.findOne({ where: { servicoId: requisicao.servicoId } });
+    const provedor = await provedorModel.findByPk(servicoIntermediario?.provedorId);
+    const provedorUser = await userModel.findByPk(provedor?.userId);
+    const cliente = await clienteModel.findByPk(requisicao.clienteId);
+    const clienteUser = await userModel.findByPk(cliente?.userId);
+    const servico = await ServicoModel.findByPk(requisicao.servicoId);
+    agendamentoModel.create({
+        clienteId: requisicao.clienteId,
+        data: requisicao.data,
+        hora: requisicao.hora,
+        provedorId: servicoIntermediario?.provedorId,
+        servicoId: requisicao.servicoId,
+    }).then(agendamentoDataRequest => {
+        if (agendamentoDataRequest == undefined) {
+            //Retorno de erro e invalida o agendamento
+        } else {
+            let email: Email = new Email(process.env.SMTP_USER, process.env.SMTP_PASS, process.env.SMTP_HOST);
+            email.init()
+            let templates = email.templateNovaRequisicao(provedorUser?.nome, servico?.nome, agendamentoDataRequest.data, agendamentoDataRequest.hora);
+            let mailOptions = email.mailOptions(provedorUser?.email, "AGENDAMENTO DE SERVIÇO", templates.htmlTemplate, templates.plainText);
+            email.send(mailOptions);
+            res.send("OK agendametno ralizado").status(200);
+        }
+    })
 }
 //NOTA: ESSA CAMPO DEVE RECEBER UM ID
 //ESSA ROTA DEVE SER ACESSADA APENAS POR UMA ROTA DE RESPOSTA

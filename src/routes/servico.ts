@@ -13,6 +13,6 @@ router.get("/get", servicoController.getAll);
 router.get("/get/:servicoId", servicoController.getById);
 router.put("/editar", servicoController.update);
 router.delete("/delete", servicoController.remove);
-
+router.get("/teste", servicoController.teste);
 
 export default router;

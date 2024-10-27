@@ -54,7 +54,7 @@ app.listen(process.env.port, () => {
     sequelize.authenticate()
         .then(() => {
             console.log('Conexão com o banco de dados estabelecida com sucesso.');
-            return sequelize.sync({ force: false }); // Sincroniza os modelos
+            return sequelize.sync({ force: true }); // Sincroniza os modelos
         })
         .then(() => {
             console.log('Modelos sincronizados com o banco de dados.');
