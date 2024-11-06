@@ -3,23 +3,8 @@ import { Request, Response } from "express";
 import { Op } from "sequelize";
 import servicoModel from "../models/Servico";
 import ProvedorServicoModel from "../models/ProvedorServico"
+import * as confirmarBd from "../services/functions/confirmarBd";
 
-//Retornar um model de todos os serviços junto ao id de seu provedor
-// const ServicosComIdsDosProvedores = () => {
-//     return servicoModel.findAll().then(servicoDataRequest => {
-//         ProvedorServicoModel.findAll().then((provedorServicoDataRequest) => {
-//             let novoRetorno = []
-//             servicoDataRequest.forEach(dataExterno => {
-//                 provedorServicoDataRequest.forEach(dataInterno => {
-//                     if (dataExterno.id == dataInterno.servicoId) {
-//                         novoRetorno.push(dataExterno["provedorId"] = dataInterno.provedorId)
-//                     }
-//                 })
-//             })
-//             return novoRetorno;
-//         })
-//     })
-// }
 const ServicosComIdsDosProvedores = async () => {
     try {
         const servicoDataRequest = await servicoModel.findAll();
@@ -43,55 +28,51 @@ const ServicosComIdsDosProvedores = async () => {
         throw error;
     }
 };
-
-const create = (req: Request, res: Response) => {
+//Criar novo seriço precisa ser refeito
+const criarServico = async (req: Request, res: Response) => {
     const requisicao = {
         nome: req.body.nome,
-        descricao: req.body.descricao,
-        provedorId: req.body.provedorId
+        descricao: req.body.descricao
     };
+    console.log(requisicao)
     Object.keys(requisicao).forEach((value) => {
         //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
         if (requisicao[value] == undefined || requisicao[value] == "") {
             res.setHeader("content-type", "application/json")
-            res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(406).end();
+            return res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(406);
         }
     })
-
-    servicoModel.create({
-        descricao: requisicao.descricao,
-        nome: requisicao.nome
-    })
-        .then((data) => {
-            if (data == undefined) {
-                res.setHeader("content-type", "application/json");
-                res.send({ msg: "SERVICE IS NOT CREATED" }).status(406).end();
-            } else {
-                ProvedorServicoModel
-                    .create({
-                        provedorId: requisicao.provedorId,
-                        servicoId: data.id
-                    }).then(data => {
-                        if (data == undefined) {
-                            res.setHeader("content-type", "application/json");
-                            res.send({ msg: "SEVICE IS NOT CREATED" }).status(406).end();
-                        } else {
-                            res.setHeader("content-type", "application/json");
-                            res.send({ msg: "SEVICE IS CREATED" }).status(201).end();
-                        }
-                    })
-                    .catch(err => {
-                        res.setHeader("content-type", "application/json");
-                        res.send({ msg: "SEVICE IS NOT CREATED, PROVEDOR NOT EXIST" }).status(406).end();
-                    })
-            }
-
-        })
-        .catch(err => {
-            console.log(err)
+    servicoModel.create(requisicao)
+        .then(novoServicoData => {
+            //função para simplificar a checagem se uma row foi ou não criada
+            return confirmarBd.confirmarSimples(req, res, novoServicoData);
+        }).catch(() => {
             res.setHeader("content-type", "application/json")
-            res.send(err).status(502)
-        })
+            return res.send({ msg: "Provedor não encontrado no banco de dados" }).status(406).end();
+        });
+}
+//Definir quais provedores atendem a esse serviço
+const definirServicoParaProvedor = async (req: Request, res: Response) => {
+    //Posso receber tanto um serviço quanto muitos serviços
+    const requisicao = {
+        provedorId: req.body.provedorId,
+        servicoId: req.body.servicoId
+    }
+    // res.setHeader("content-type", "application/json");
+    // res.send(requisicao)
+    try {
+        let servicoProvedores = [];
+        //Fazer loop para o provedor
+        for (let x of requisicao.provedorId) {
+            servicoProvedores.push({ servicoId: requisicao.servicoId, provedorId: x })
+        }
+        const bulkDados = ProvedorServicoModel.bulkBuild(servicoProvedores);
+
+        res.setHeader("content-type", "application/json");
+        return res.send({ msg: "OK" }).send(201).end();
+    } catch (erro) {
+        res.send(erro).status(500);
+    }
 }
 const getById = (req: Request, res: Response) => {
     //A requisição mista com body sendo o id de provedor, e a querry sendo o id de servico
@@ -137,41 +118,16 @@ const getById = (req: Request, res: Response) => {
 }
 const getAll = (req: Request, res: Response) => {
     //Requisição do tipo body em que sera puxado todos ps seviços do provedor
-    const requisicao = {
-        provedorId: req.body.provedorId
-    }
+
     //Adicionar os catches de ERRO e O else de undefined se não encontrados
-    ProvedorServicoModel
-        .findAll(
-            {
-                where:
-                {
-                    provedorId: requisicao.provedorId
-                }
-            })
-        .then(ProvedorServicoDataRequest => {
-            if (ProvedorServicoDataRequest == undefined) {
-                //provedor não encontrado
-                res.send({ msg: "Provedor não encontrado" }).status(406).end();
+    servicoModel.findAll()
+        .then(servicoData => {
+            if (servicoData == undefined) {
+                res.set("content-type", "application/json");
+                return res.send({ msg: null }).status(200);
             } else {
-                res.setHeader('Content-Type', 'text/plain');
-                let id = ProvedorServicoDataRequest.map(obj => obj.servicoId);
-                servicoModel.findAll({
-                    where: {
-                        id: {
-                            [Op.in]: id
-                        }
-                    }
-                })
-                    .then(ServicoDataRequest => {
-                        if (ServicoDataRequest == undefined) {
-                            res.send({ msg: "Nenhum serviço encontrado" }).status(204).end();
-                        } else {
-
-                        }
-
-                        res.send(ServicoDataRequest).end();
-                    })
+                res.setHeader("content-type", "application/json");
+                res.send(servicoData);
             }
         })
 }
@@ -288,4 +244,4 @@ const teste = async (req: Request, res: Response) => {
     const retorno = await ServicosComIdsDosProvedores();
     res.send(retorno).status(200)
 }
-export { create, getById, getAll, update, remove, teste, ServicosComIdsDosProvedores };
+export { criarServico, definirServicoParaProvedor, getById, getAll, update, remove, teste, ServicosComIdsDosProvedores };

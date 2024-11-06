@@ -2,7 +2,7 @@ import express, { Response, Request } from "express";
 import dotenv from "dotenv"
 import { join } from "path";
 import session from "express-session";
-
+//import jwt from "jsonwebtoken";
 //Conecção com o banco de dados 
 import { sequelize } from "./models/DataBase";
 
@@ -14,8 +14,6 @@ import agendamentoRouter from "./routes/agendamento"
 import servicoRouter from "./routes/servico";
 import administradorRouter from "./routes/administrador";
 import viewRouter from "./routes/views";
-//Importando classes 
-import { Email } from "./services/Email";
 //Iniciando a apliação
 const app = express();
 //Configurando as variaveis de ambiente

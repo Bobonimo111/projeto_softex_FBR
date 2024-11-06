@@ -1,0 +1,24 @@
+//Criar novo serviço
+POST http://localhost:3000/servico/criar
+Content-Type: application/json
+
+{
+    "nome":"instalação de internet",
+    "descricao":"a instalação de um ponto de internet"
+}
+
+### 
+//Atribuir serviço a um provedor
+POST http://localhost:3000/servico/definir
+Content-Type: application/json
+
+{
+    "servicoId": 1,
+    "provedorId": [1,2,3]
+}
+
+### 
+//Ver todos os serviços cadastrados
+GET http://localhost:3000/servico/get
+
+### 

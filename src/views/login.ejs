@@ -57,8 +57,8 @@
                 <h5 class="card-title text-orange" style="color: #ff6600;">Login</h5>
                 <p class="card-text">Entre com suas credenciais</p>
             </div>
-            <form method="post" action="/cliente/login" onsubmit="controlarFormulario">
-                <div class="mb-3">
+            <form method="post" action="/cliente/login">
+                <div class=" mb-3">
                     <label for="email" class="form-label">Email</label>
                     <div class="input-group">
                         <input type="email" class="form-control" id="email" name="email"
@@ -78,10 +78,6 @@
         </div>
     </div>
 </body>
-<script>
-    function controlarFormulario(ev) {
-        ev.preventDefault();
-    }
-</script>
+
 
 </html>

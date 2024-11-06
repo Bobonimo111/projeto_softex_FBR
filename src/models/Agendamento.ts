@@ -13,6 +13,7 @@ interface AgendamentoAttributes {
     id: bigint;
     data: Date;
     hora: string;
+    //status: string;
     servicoId: bigint;
     clienteId: bigint;
     provedorId: bigint;
@@ -22,6 +23,7 @@ class Agendamento extends Model<AgendamentoAttributes> implements AgendamentoAtt
     declare id: bigint;
     declare data: Date;
     declare hora: string;
+    //declare status: 'pendente' | 'confirmado' | 'cancelado';
     declare servicoId: bigint;
     declare clienteId: bigint;
     declare provedorId: bigint;
@@ -63,6 +65,10 @@ Agendamento.init(
             },
             allowNull: false,
         },
+        // status: {
+        //     type: DataTypes.ENUM('pendente', 'confirmado', 'cancelado'),
+        //     allowNull: false,
+        // },
         provedorId: {
             type: DataTypes.BIGINT,
             references: {

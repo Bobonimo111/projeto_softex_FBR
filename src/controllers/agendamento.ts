@@ -5,7 +5,6 @@ import userModel from "../models/User"
 import provedorModel from "../models/Provedor"
 import ServicoModel from "../models/Servico"
 import agendamentoModel from "../models/Agendamento"
-import { ServicosComIdsDosProvedores } from "./servico";
 import ProvedorServicoModel from "../models/ProvedorServico";
 // import axios from "axios";
 /**
@@ -29,6 +28,7 @@ const solicitarNovoAgendamento = async (req: Request, res: Response) => {
         data: req.body.data,
         servicoId: req.body.servicoId,
         clienteId: req.body.clienteId,
+        status: "pendente"
     }
     console.log(requisicao)
     //Conferir se todos os campos estão preenchidos

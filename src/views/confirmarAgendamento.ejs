@@ -91,13 +91,10 @@
             <form method="post" action="/agendamento/novo">
                 <div class="mb-3">
                     <label for="opcao" class="form-label">Escolha uma opção:</label>
+                    <!-- DEFINIR UM INPUT DISABLED COM O SERVIÇO ESCOLHIDO -->
                     <select class="form-select" id="servicoId" name="servicoId">
-                        <% servicoDatas.forEach(element=> { %>
-                            <option value=" <%=element.id %>">
-                                <%- element.nome %>
-                            </option>
-                            <% }) %>
-                    </select>
+                        <input type="text" value>
+
                 </div>
                 <div class="mb-3">
                     <label for="data" class="form-label">Data</label>
@@ -116,7 +113,7 @@
                         <span class="input-group-text"><i class="fas fa-clock"></i></span>
                     </div>
                 </div>
-                <input name="clienteId" id="clienteId" value="<%= session.id %>">
+                <!-- <input name="clienteId" id="clienteId" value="<%= //session.id %>"> -->
                 <button type="submit" class="btn btn-orange w-100">Enviar</button>
             </form>
         </div>

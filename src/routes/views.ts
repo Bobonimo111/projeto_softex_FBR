@@ -6,9 +6,9 @@ router.get("/")
 router.get("/login", viewsController.cliente_login);
 router.get("/cadastro",);
 
-//Gerson deve fazer essa primeira view 
+//Agendamento
 router.get("/agendamento", viewsController.agendamento);
 router.get("/responder-requisicao")
-
+router.get("/responder-agendamento/:id", viewsController.responderAgendamento)
 
 export default router;

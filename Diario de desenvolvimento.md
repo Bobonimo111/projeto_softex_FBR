@@ -72,3 +72,13 @@
 >
 >Nesse meio tempo iniciei a parte de agendamentos, tive alguns contra tempo com a questão do banco de dados, o projeto já perdeu a infraestrutura a muito tempo e tenho até dia 30, entregar uma parte do projeto funcionando.
 >Vou finalizar hoje a questão de agendamentos e realizar um mapeamento nas rotas
+
+### 28/10/2024
+>
+>O provedor serviço de emails que estou utilizando não vai funcionar, por questões de dominio
+>Vou optar por polir o codigo da forma que está agora;
+
+### 03/11/2024
+>
+>Ocorram muitos imprevistos, vou refazer algumas partes do codigo para melhorar o desenvolvimento e a estrutura geral
+>Começar pela parte de serviços

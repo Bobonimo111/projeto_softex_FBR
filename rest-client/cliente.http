@@ -1,0 +1,21 @@
+POST http://localhost:3000/cliente/cadastro
+Content-Type: application/x-www-form-urlencoded
+
+nome=William
+&cpf=000.000.000-00
+&sexo=m
+&email=carlosmaycon443@gmail.com
+&senha=1234
+&cnpj=""
+
+### CADASTRO
+
+POST http://localhost:3000/cliente/login
+Content-Type: application/json
+
+{
+"email":"carlosmaycon443@gmail.com",
+"senha":"1234"
+}
+
+### AGENDAR
