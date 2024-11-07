@@ -82,3 +82,8 @@
 >
 >Ocorram muitos imprevistos, vou refazer algumas partes do codigo para melhorar o desenvolvimento e a estrutura geral
 >Começar pela parte de serviços
+
+### 07/11/2024
+>
+>Hoje estou implementando os tratamentos de erro para evitar a queda do servidor
+>Ao completar essa etapa vai ficar faltando a parte do **cronograma**

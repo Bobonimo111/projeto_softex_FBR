@@ -33,14 +33,14 @@ _**Exemplo /adminitrador/login**_
 
 ### cliente
 
-| ROTA | TIPO | PARAMENTROS |STATUS|OQ FALTA|
+| ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
 |------|------|-------|-------|-------|
 |/cadastrar      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|OK||
 |/login   |POST     |BODY:email,senha |DEV|Criar sessão ao logar|
 
 ### provedor
 
-| ROTA | TIPO | PARAMENTROS |STATUS|OQ FALTA|
+| ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
 |------|------|-------|-------|-------|
 |/cadastrar      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|DEV|Definir que Apenas um adm poder um provedor|
 |/login   |POST     |BODY:email,senha |DEV|Criar sessão ao logar|
@@ -48,14 +48,14 @@ _**Exemplo /adminitrador/login**_
 
 ### administrador
 
-| ROTA | TIPO | PARAMENTROS |STATUS|OQ FALTA|
+| ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
 |------|------|-------|-------|-------|
 |/cadastrar      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|DEV|Definir que Apenas um adm poder criar outro adm|
 |/login   |POST     |BODY:email,senha |DEV|Criar sessão ao logar|
 
 ### servico
 
-| ROTA | TIPO | PARAMENTROS |STATUS|OQ FALTA|
+| ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
 |------|------|-------|-------|-------|
 |/cadastrar      |POST      |BODY:nome,descricao|OK||
 |/get   |PUT      |NONE|OK||
@@ -65,7 +65,7 @@ _**Exemplo /adminitrador/login**_
 
 ### agendamento
 
-| ROTA | TIPO | PARAMENTROS |STATUS|
+| ROTA | TIPO | PARAMETROS |STATUS|
 |------|------|-------|-------|
 |/novo      |POST      |BODY: data,hora,servicoId,clienteId |OK|
 |/   |PUT      |BODY: data,hora,servicoId,clienteId       ||

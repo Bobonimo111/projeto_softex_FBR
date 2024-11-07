@@ -1,6 +1,7 @@
 //CADASTRAR SERVIÇO
 POST http://localhost:3000/servico/criar
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTAyMjcxMywiZXhwIjoxNzMxMDI5OTEzfQ.0if42r4TOwZpq3DeUn-EP32Y1sw4M3lhun_00AkFpjY
 
 {
     "nome":"instalação de internet",

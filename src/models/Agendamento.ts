@@ -43,11 +43,11 @@ Agendamento.init(
         },
         data: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         hora: {
             type: DataTypes.TIME,
-            allowNull: false,
+            allowNull: true,
         },
         servicoId: {
             type: DataTypes.BIGINT,
@@ -84,5 +84,6 @@ Agendamento.init(
         timestamps: true,
     }
 );
+Agendamento.sync({ force: true })
 
 export default Agendamento;

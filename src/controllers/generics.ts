@@ -50,7 +50,7 @@ const login = function <UserModel>(req: Request, res: Response, requisicao: any,
     }
     catch (err) {
         res.setHeader("content-type", "application/json");
-        res.send({ msg: "OCORREU ALGUM ERRO PREENCHA TODOS OS CAMPOS" }).status(406);
+        res.send({ msg: err }).status(500);
     }
 }
 
@@ -92,8 +92,10 @@ const cadastro = function <UserModel, RoleModel>(req: Request, res: Response, re
                 res.setHeader("content-type", "application/json")
                 res.send({ msg: "fail to created user" }).status(400);
             })
-    } catch (erro) {
-        console.log(erro);
+    } catch (err) {
+        // console.log(erro);
+        res.setHeader("content-type", "application/json");
+        res.send({ msg: err }).status(500);
     }
 }
 

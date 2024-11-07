@@ -1,8 +1,8 @@
-import { Response, Request } from "express";
+import { Response, Request, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
 //Definir o tipo de acesso direto na rota
-function administrador(req: Request, res: Response, next) {
+function administrador(req: Request, res: Response, next: NextFunction) {
     const role = "administrador"
     const token = req.headers["authorization"]
     console.log(token)
@@ -21,7 +21,7 @@ function administrador(req: Request, res: Response, next) {
         next();
     })
 }
-function cliente(req: Request, res: Response, next) {
+function cliente(req: Request, res: Response, next: NextFunction) {
     const role = "cliente"
     const token = req.headers["authorization"]
     console.log(token)
@@ -40,7 +40,7 @@ function cliente(req: Request, res: Response, next) {
         next();
     })
 }
-function provedor(req: Request, res: Response, next) {
+function provedor(req: Request, res: Response, next: NextFunction) {
     const role = provedor;
     const token = req.headers["authorization"]
     console.log(token)

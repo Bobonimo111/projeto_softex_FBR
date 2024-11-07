@@ -23,46 +23,49 @@ import ProvedorServicoModel from "../models/ProvedorServico";
 
 
 const solicitarNovoAgendamento = async (req: Request, res: Response) => {
-    let requisicao = {
-        hora: req.body.hora,
-        data: req.body.data,
-        servicoId: req.body.servicoId,
-        clienteId: req.body.clienteId,
-        status: "pendente"
+    try {
+        let requisicao = {
+            servicoId: req.body.servicoId,
+            clienteId: req.body.clienteId,
+            status: "pendente"
+        }
+        console.log(requisicao)
+        //Conferir se todos os campos estão preenchidos
+        Object.keys(requisicao).forEach((value) => {
+            //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
+            if (requisicao[value] == undefined || requisicao[value] == "") {
+                res.setHeader("content-type", "application/json")
+                res.send({ msg: "Not make requisition, " + value + " is undefined" }).status(406);
+            }
+        })
+        const servicoIntermediario = await ProvedorServicoModel.findOne({ where: { servicoId: requisicao.servicoId } });
+        const provedor = await provedorModel.findByPk(servicoIntermediario?.provedorId);
+        const provedorUser = await userModel.findByPk(provedor?.userId);
+        const cliente = await clienteModel.findByPk(requisicao.clienteId);
+        const clienteUser = await userModel.findByPk(cliente?.userId);
+        const servico = await ServicoModel.findByPk(requisicao.servicoId);
+        requisicao["provedorId"] = servicoIntermediario?.provedorId;
+        console.log(requisicao)
+        agendamentoModel.create(requisicao).then(agendamentoDataRequest => {
+            if (agendamentoDataRequest == undefined) {
+                //Retorno de erro e invalida o agendamento
+            } else {
+                let email: Email = new Email(process.env.SMTP_USER, process.env.SMTP_PASS, process.env.SMTP_HOST);
+                email.init()
+                let templates = email.templateNovaRequisicao(provedorUser?.nome, servico?.nome, agendamentoDataRequest.data, agendamentoDataRequest.hora);
+                let mailOptions = email.mailOptions(provedorUser?.email, "AGENDAMENTO DE SERVIÇO", templates.htmlTemplate, templates.plainText);
+                email.send(mailOptions);
+                res.send("OK agendametno ralizado").status(200);
+            }
+        }).catch(err => {
+            res.setHeader("content-type", "application/json");
+            res.send({ msg: err }).status(500);
+        })
     }
-    console.log(requisicao)
-    //Conferir se todos os campos estão preenchidos
-    Object.keys(requisicao).forEach((value) => {
-        //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
-        if (requisicao[value] == undefined || requisicao[value] == "") {
-            res.setHeader("content-type", "application/json")
-            res.send({ msg: "Not make requisition, " + value + " is undefined" }).status(406);
-        }
-    })
-    const servicoIntermediario = await ProvedorServicoModel.findOne({ where: { servicoId: requisicao.servicoId } });
-    const provedor = await provedorModel.findByPk(servicoIntermediario?.provedorId);
-    const provedorUser = await userModel.findByPk(provedor?.userId);
-    const cliente = await clienteModel.findByPk(requisicao.clienteId);
-    const clienteUser = await userModel.findByPk(cliente?.userId);
-    const servico = await ServicoModel.findByPk(requisicao.servicoId);
-    agendamentoModel.create({
-        clienteId: requisicao.clienteId,
-        data: requisicao.data,
-        hora: requisicao.hora,
-        provedorId: servicoIntermediario?.provedorId,
-        servicoId: requisicao.servicoId,
-    }).then(agendamentoDataRequest => {
-        if (agendamentoDataRequest == undefined) {
-            //Retorno de erro e invalida o agendamento
-        } else {
-            let email: Email = new Email(process.env.SMTP_USER, process.env.SMTP_PASS, process.env.SMTP_HOST);
-            email.init()
-            let templates = email.templateNovaRequisicao(provedorUser?.nome, servico?.nome, agendamentoDataRequest.data, agendamentoDataRequest.hora);
-            let mailOptions = email.mailOptions(provedorUser?.email, "AGENDAMENTO DE SERVIÇO", templates.htmlTemplate, templates.plainText);
-            email.send(mailOptions);
-            res.send("OK agendametno ralizado").status(200);
-        }
-    })
+    catch (err) {
+        res.setHeader("content-type", "application/json");
+        res.send({ msg: err }).status(500);
+    }
 }
 //NOTA: ESSA CAMPO DEVE RECEBER UM ID
 //ESSA ROTA DEVE SER ACESSADA APENAS POR UMA ROTA DE RESPOSTA
@@ -87,6 +90,11 @@ const modificarAgendamento = (req: Request, res: Response) => {
 
 const cancelarAgendamento = (req: Request, res: Response) => {
 
+}
+
+const agendamentoRealizado = (req: Request, res: Response) => {
+    //o agendamento so pode ser finalizado pelo provedor que recebeu o pedido
+    //o ao ser finalizado, deve ser posto data e hora da finalização.
 }
 //TEste de envio de emails
 // app.get("/emailTest", (req: Request, res: Response) => {
