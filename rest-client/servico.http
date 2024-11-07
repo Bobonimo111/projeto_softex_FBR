@@ -1,10 +1,11 @@
-//Criar novo serviço
+//CADASTRAR SERVIÇO
 POST http://localhost:3000/servico/criar
 Content-Type: application/json
 
 {
     "nome":"instalação de internet",
     "descricao":"a instalação de um ponto de internet"
+    //ADICIONAR HASH DE ADM
 }
 
 ### 
@@ -14,11 +15,15 @@ Content-Type: application/json
 
 {
     "servicoId": 1,
-    "provedorId": [1,2,3]
+    "provedorId": [1]
+    //ADICIONAR HASH DE ADM
 }
 
 ### 
 //Ver todos os serviços cadastrados
 GET http://localhost:3000/servico/get
+//Sempre trocar pelo novo token de adm
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMDk0OTE1MSwiZXhwIjoxNzMwOTU2MzUxfQ.7ww01AHpiozc4zlJKtzRM_DJRN5eJuy_g8mtD8lusbk
+Content-Type: application/json
 
 ### 

@@ -11,6 +11,7 @@ function login(req: Request, res: Response) {
         senha: req.body.senha,
         rule: "administrador"
     }
+
     generics.login(req, res, requisicao, userModel)
 };
 function cadastro(req: Request, res: Response) {

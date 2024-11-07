@@ -66,10 +66,10 @@ const definirServicoParaProvedor = async (req: Request, res: Response) => {
         for (let x of requisicao.provedorId) {
             servicoProvedores.push({ servicoId: requisicao.servicoId, provedorId: x })
         }
-        const bulkDados = ProvedorServicoModel.bulkBuild(servicoProvedores);
-
+        await ProvedorServicoModel.bulkCreate(servicoProvedores);
+        console.log(ProvedorServicoModel)
         res.setHeader("content-type", "application/json");
-        return res.send({ msg: "OK" }).send(201).end();
+        return res.send({ msg: "OK" }).status(201).end();
     } catch (erro) {
         res.send(erro).status(500);
     }

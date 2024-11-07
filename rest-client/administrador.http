@@ -1,5 +1,5 @@
-// CADASTRAR CLIENTE 
-POST http://localhost:3000/cliente/cadastro
+// CADASTRAR administrador 
+POST http://localhost:3000/administrador/cadastro
 Content-Type: application/json
 
 {
@@ -11,8 +11,8 @@ Content-Type: application/json
     "cnpj":""
 }
 
-### LOGAR CLIENTE
-POST http://localhost:3000/cliente/login
+### LOGAR administrador
+POST http://localhost:3000/administrador/login
 Content-Type: application/json
 
 {

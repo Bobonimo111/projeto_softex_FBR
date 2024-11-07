@@ -44,6 +44,7 @@ _**Exemplo /adminitrador/login**_
 |------|------|-------|-------|-------|
 |/cadastrar      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|DEV|Definir que Apenas um adm poder um provedor|
 |/login   |POST     |BODY:email,senha |DEV|Criar sessão ao logar|
+|/cronograma   |GET     |HEAD:Authorization token, provedorId |DEV|CRIAR|
 
 ### administrador
 
@@ -56,11 +57,11 @@ _**Exemplo /adminitrador/login**_
 
 | ROTA | TIPO | PARAMENTROS |STATUS|OQ FALTA|
 |------|------|-------|-------|-------|
-|/cadastrar      |POST      |BODY:nome,descricao,provedorId|DEV|Definir que apenas um provedor possa criar um serviço|
+|/cadastrar      |POST      |BODY:nome,descricao|OK||
 |/get   |PUT      |NONE|OK||
 |/get/:id      |PUT   |URL:servicoId     |OK||
-|/editar      |PUT   |       ||TUDO|
-|/deletar      |PUT   |       ||TUDO|
+|/editar      |PUT   |BODY:nome?,descricao?|OK||
+|/deletar      |PUT   |BODT:provedorId,servicoId|OK||
 
 ### agendamento
 

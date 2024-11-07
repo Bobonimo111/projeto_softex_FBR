@@ -32,8 +32,8 @@ const login = function <UserModel>(req: Request, res: Response, requisicao: any,
                     //     role: data.role
                     // }
                     // console.log(req.session.user)
-                    const token = jwt.sign({ id: data.id }, "Segredo", {
-                        expiresIn: 300
+                    const token = jwt.sign(requisicao, process.env.JWT_SECRET, {
+                        expiresIn: "2h"
                     })
                     return res.json({ auth: true, token: token });
                     //res.redirect("/agendamento");

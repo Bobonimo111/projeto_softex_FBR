@@ -1,0 +1,12 @@
+POST  http://localhost:3000/agendamento/novo
+Content-Type: application/json
+
+{
+    "hora":"12:00",
+    "data":"2024-12-20",
+    "servicoId":"1",
+    "clienteId":"1"
+    //Hash de persmissão de cliente
+}
+
+###
