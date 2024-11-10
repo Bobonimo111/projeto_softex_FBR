@@ -55,7 +55,7 @@ const solicitarNovoAgendamento = async (req: Request, res: Response) => {
                 let templates = email.templateNovaRequisicao(provedorUser?.nome, servico?.nome, agendamentoDataRequest.data, agendamentoDataRequest.hora);
                 let mailOptions = email.mailOptions(provedorUser?.email, "AGENDAMENTO DE SERVIÇO", templates.htmlTemplate, templates.plainText);
                 email.send(mailOptions);
-                res.send("OK agendametno ralizado").status(200);
+                res.send("OK agendametno realizado").status(200);
             }
         }).catch(err => {
             res.setHeader("content-type", "application/json");
@@ -92,9 +92,26 @@ const cancelarAgendamento = (req: Request, res: Response) => {
 
 }
 
-const agendamentoRealizado = (req: Request, res: Response) => {
+const getById = (req: Request, res: Response) => {
+    let requisicao = {
+        agendamentoId: req.params.id
+    }
     //o agendamento so pode ser finalizado pelo provedor que recebeu o pedido
     //o ao ser finalizado, deve ser posto data e hora da finalização.
+    try {
+        agendamentoModel.findByPk(requisicao.agendamentoId)
+            .then(agendamentoDateRequest => {
+                if (agendamentoDateRequest) {
+                    res.setHeader("content-type", "application/json");
+                    res.send(agendamentoDateRequest).status(200);
+                } else {
+                    res.setHeader("content-type", "application/json");
+                    res.send({ "msg": "Sem agendamento no id" }).status(206);
+                }
+            })
+    } catch (err) {
+
+    }
 }
 //TEste de envio de emails
 // app.get("/emailTest", (req: Request, res: Response) => {

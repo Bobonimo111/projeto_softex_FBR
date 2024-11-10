@@ -35,7 +35,7 @@ _**Exemplo /adminitrador/login**_
 
 | ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
 |------|------|-------|-------|-------|
-|/cadastrar      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|OK||
+|/cadastro      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|OK||
 |/login   |POST     |BODY:email,senha |DEV|Criar sessão ao logar|
 
 ### provedor

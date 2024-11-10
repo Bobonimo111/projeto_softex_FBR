@@ -2,6 +2,7 @@ import express, { Response, Request } from "express";
 import dotenv from "dotenv"
 import { join } from "path";
 import session from "express-session";
+import swaggerUi from "swagger-ui-express";
 //import jwt from "jsonwebtoken";
 //Conecção com o banco de dados 
 import { sequelize } from "./models/DataBase";
@@ -14,6 +15,9 @@ import agendamentoRouter from "./routes/agendamento"
 import servicoRouter from "./routes/servico";
 import administradorRouter from "./routes/administrador";
 import viewRouter from "./routes/views";
+
+//Importando arquivo swagger docs
+import swaggerDocs from "./swagger.json";
 //Iniciando a apliação
 const app = express();
 //Configurando as variaveis de ambiente
@@ -28,6 +32,9 @@ app.set("views", join(__dirname, "/views")); 97
 
 //Configuração de arquivos estaticos
 app.use("/static", express.static(join(__dirname, "public")));
+
+//Setando configurações para documentação
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 
 //Configuração de sessão

@@ -1,0 +1,790 @@
+{
+    "openapi": "3.0.0",
+    "infos": {
+        "title": "FBR agendamentos",
+        "description": "Uma aplicação que visa a realização do agendamento, por meio do cliente, a visualização por meio do provedor e a gestão por parte da FBR de todo o projeto",
+        "version": "0.0.1"
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Token de autenticação JWT"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cliente",
+            "description": "Operações relacionadas aos cliente"
+        },
+        {
+            "name": "Provedor",
+            "description": "Operações relacionadas aos provedor"
+        },
+        {
+            "name": "Administrador",
+            "description": "Operações relacionadas aos administradores"
+        },
+        {
+            "name": "Servicos",
+            "description": "Relacionado aos servicos, JWT não funciona no swagger"
+        },
+        {
+            "name": "Agendamento",
+            "description": "Relacionado aos agendamento"
+        }
+    ],
+    "paths": {
+        "/cliente/cadastro": {
+            "post": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Cadastrar cliente",
+                "description": "Cadastra um novo cliente",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "sexo": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    },
+                                    "cnpj": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nome",
+                                    "cpf",
+                                    "sexo",
+                                    "email",
+                                    "senha",
+                                    "cnpj"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente cadastrado com sucesso"
+                    },
+                    "400": {
+                        "description": "Valor não valido ou indefinido"
+                    }
+                }
+            }
+        },
+        "/cliente/login": {
+            "post": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Login do cliente",
+                "description": "Realiza o login do cliente e cria uma sessão",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "senha"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "auth": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Valor não valido ou indefinido"
+                    }
+                }
+            }
+        },
+        "/provedor/cadastro": {
+            "post": {
+                "tags": [
+                    "Provedor"
+                ],
+                "summary": "Cadastrar provedor",
+                "description": "Cadastra um novo provedor",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "sexo": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    },
+                                    "cnpj": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nome",
+                                    "cpf",
+                                    "sexo",
+                                    "email",
+                                    "senha",
+                                    "cnpj"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "provedor cadastrado com sucesso"
+                    },
+                    "400": {
+                        "description": "Valor não valido ou indefinido"
+                    }
+                }
+            }
+        },
+        "/provedor/login": {
+            "post": {
+                "tags": [
+                    "Provedor"
+                ],
+                "summary": "Login do provedor",
+                "description": "Realiza o login do provedor e cria uma sessão",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "senha"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "auth": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Valor não valido ou indefinido"
+                    }
+                }
+            }
+        },
+        "/administrador/cadastro": {
+            "post": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Cadastrar administrador",
+                "description": "Cadastra um novo administrador",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "sexo": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    },
+                                    "cnpj": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nome",
+                                    "cpf",
+                                    "sexo",
+                                    "email",
+                                    "senha",
+                                    "cnpj"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "administrador cadastrado com sucesso"
+                    },
+                    "400": {
+                        "description": "Valor não valido ou indefinido"
+                    }
+                }
+            }
+        },
+        "/administrador/login": {
+            "post": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Login do administrador",
+                "description": "Realiza o login do administrador e cria uma sessão",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "senha"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "auth": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Valor não valido ou indefinido"
+                    }
+                }
+            }
+        },
+        "/servico/criar": {
+            "post": {
+                "tags": [
+                    "Servicos"
+                ],
+                "summary": "Criar um novo serviço",
+                "description": "Cria um novo serviço no banco de dados",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Token de autenticação JWT",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "nome",
+                                    "descricao"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "tudo OK"
+                    },
+                    "406": {
+                        "description": "algo deu errado"
+                    }
+                }
+            }
+        },
+        "/servico/definir": {
+            "post": {
+                "tags": [
+                    "Servicos"
+                ],
+                "summary": "Criar um novo serviço",
+                "description": "Defini um provedor ou uma serie de provedores para um serviço ",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Token de autenticação JWT",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "servicoId": {
+                                        "type": "string"
+                                    },
+                                    "provedorId": {
+                                        "type": "List"
+                                    }
+                                },
+                                "required": [
+                                    "servicoId",
+                                    "provedorId"
+                                ],
+                                "example": {
+                                    "servicoId": 1,
+                                    "provedorId": [
+                                        1,
+                                        2
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "tudo OK"
+                    },
+                    "406": {
+                        "description": "algo deu errado"
+                    }
+                }
+            }
+        },
+        "/servico/get": {
+            "get": {
+                "tags": [
+                    "Servicos"
+                ],
+                "summary": "Obter todos os serviços cadastrados",
+                "description": "Retorna todos os serviços cadastrados no banco de dados. Se não houver serviços, retorna null.",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Token de autenticação JWT",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna todos os serviços cadastrados ou null caso não haja serviços.",
+                        "example": [
+                            {
+                                "id": 1,
+                                "nome": "Serviço de Consultoria",
+                                "descricao": "Consultoria especializada em TI"
+                            },
+                            {
+                                "id": 2,
+                                "nome": "Desenvolvimento Web",
+                                "descricao": "Criação de sites e soluções web"
+                            }
+                        ]
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/get/{servicoId}": {
+            "get": {
+                "tags": [
+                    "Servicos"
+                ],
+                "summary": "Obter um serviço específico",
+                "description": "Retorna um serviço específico baseado no ID fornecido na URL. Pode usar query params para filtrar ou ajustar a resposta.",
+                "parameters": [
+                    {
+                        "name": "servicoId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "description": "ID do serviço"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna o serviço solicitado.",
+                        "example": {
+                            "servicoId": 1,
+                            "nome": "Consultoria em TI",
+                            "descricao": "Consultoria especializada para empresas de tecnologia",
+                            "detalhes": "Inclui análise de infraestrutura, reuniões de planejamento e relatórios semanais."
+                        }
+                    },
+                    "404": {
+                        "description": "Serviço não encontrado"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/servico/editar": {
+            "post": {
+                "tags": [
+                    "Servicos"
+                ],
+                "summary": "Criar um novo serviço",
+                "description": "Cria um novo serviço no banco de dados",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Token de autenticação JWT",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Serviço atualizado"
+                    },
+                    "406": {
+                        "description": "Serviço não encontrado"
+                    }
+                }
+            }
+        },
+        "/servico/deletar": {
+            "post": {
+                "tags": [
+                    "Servicos"
+                ],
+                "summary": "Remove um serviço",
+                "description": "Remove um serviço do banco de dados",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Token de autenticação JWT",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Serviço removido"
+                    },
+                    "406": {
+                        "description": "Serviço não encontrado"
+                    }
+                }
+            }
+        },
+        "/agendamento/novo": {
+            "post": {
+                "tags": [
+                    "Agendamento"
+                ],
+                "summary": "Cria um novo agendamento",
+                "description": "Cria um agendamento, vindo do cliente e envia um email notificando o provedor",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Token de autenticação JWT",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "servicoId": {
+                                        "type": "string"
+                                    },
+                                    "clienteId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "servicoId",
+                                    "clienteId"
+                                ],
+                                "example": {
+                                    "servicoId": 1,
+                                    "clienteId": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK agendametno realizado"
+                    },
+                    "406": {
+                        "description": "Not make requisition, value is undefined"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/agendamento/realizado": {
+            "put": {
+                "tags": [
+                    "Agendamento"
+                ],
+                "summary": "Homologa o agendamento como realizado",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Token de autenticação JWT",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "string"
+                                    },
+                                    "hora": {
+                                        "type": "string"
+                                    },
+                                    "agendamentoId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "data",
+                                    "hora",
+                                    "agendamentoId"
+                                ],
+                                "example": {
+                                    "data": "yyyy/mm/dd formato americano",
+                                    "hora": "16:50 Formato 24horas",
+                                    "agendamentoId": "1"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "confirmado"
+                    },
+                    "406": {
+                        "description": "Not make requisition, value is undefined"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        }
+    }
+}

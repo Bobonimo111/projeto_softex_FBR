@@ -9,7 +9,7 @@ const login = function <UserModel>(req: Request, res: Response, requisicao: any,
 
             if (requisicao[value] == undefined || requisicao[value] == "") {
                 res.setHeader("content-type", "application/json")
-                res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(406).end();
+                return res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(400).end();
             }
         })
 
@@ -35,22 +35,22 @@ const login = function <UserModel>(req: Request, res: Response, requisicao: any,
                     const token = jwt.sign(requisicao, process.env.JWT_SECRET, {
                         expiresIn: "2h"
                     })
-                    return res.json({ auth: true, token: token });
+                    return res.json({ auth: true, token: token }).status(200);
                     //res.redirect("/agendamento");
                 } else {
                     res.setHeader("content-type", "application/json");
-                    res.send({ msg: "PASS INVALID" }).status(200);
+                    return res.send({ msg: "PASS INVALID" }).status(200);
                 }
             } else {
                 res.setHeader("content-type", "application/json");
-                res.send({ msg: "USER NOT FOUND" }).status(400);
+                return res.send({ msg: "USER NOT FOUND" }).status(400);
             }
         })
 
     }
     catch (err) {
         res.setHeader("content-type", "application/json");
-        res.send({ msg: err }).status(500);
+        return res.send({ msg: err }).status(500);
     }
 }
 
@@ -61,7 +61,7 @@ const cadastro = function <UserModel, RoleModel>(req: Request, res: Response, re
             //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
             if (requisicao[value] == undefined || requisicao[value] == "" && value != "cnpj") {
                 res.setHeader("content-type", "application/json")
-                res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(406);
+                return res.send({ msg: "Not valid value, " + value + " is undefined or null" }).status(400);
             }
         })
         //adicionar criptografia, e escrita no banco de dados        // let salt = bcrypt.genSaltSync();
@@ -78,24 +78,22 @@ const cadastro = function <UserModel, RoleModel>(req: Request, res: Response, re
                     .save()
                     .then(() => {
                         res.setHeader("content-type", "application/json")
-                        res.send({ "msg": "user is created" }).status(201);
+                        return res.send({ "msg": "Instancia de user/" + instance.role }).status(201);
                     })
                     .catch((erro: Error) => {
-                        console.log("fail to created user");
-                        console.log(erro);
+                        //Erro interno
                         res.setHeader("content-type", "application/json")
-                        res.send({ msg: "fail to created user" }).status(400);
+                        return res.send({ msg: erro }).status(500);
                     })
             }).catch(function (erro: Error) {
-                console.log("fail to created user");
-                console.log(erro);
+                //Erro interno
                 res.setHeader("content-type", "application/json")
-                res.send({ msg: "fail to created user" }).status(400);
+                return res.send({ msg: erro }).status(500);
             })
     } catch (err) {
         // console.log(erro);
         res.setHeader("content-type", "application/json");
-        res.send({ msg: err }).status(500);
+        return res.send({ msg: err }).status(500);
     }
 }
 

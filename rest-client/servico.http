@@ -1,12 +1,11 @@
 //CADASTRAR SERVIÇO
 POST http://localhost:3000/servico/criar
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTAyMjcxMywiZXhwIjoxNzMxMDI5OTEzfQ.0if42r4TOwZpq3DeUn-EP32Y1sw4M3lhun_00AkFpjY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ
 
 {
     "nome":"instalação de internet",
     "descricao":"a instalação de um ponto de internet"
-    //ADICIONAR HASH DE ADM
 }
 
 ### 
