@@ -160,7 +160,23 @@
                 ],
                 "summary": "Cadastrar provedor",
                 "description": "Cadastra um novo provedor",
-                "parameters": [],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "Token de autenticação JWT",
+                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -509,23 +525,7 @@
                 ],
                 "summary": "Obter todos os serviços cadastrados",
                 "description": "Retorna todos os serviços cadastrados no banco de dados. Se não houver serviços, retorna null.",
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "description": "Token de autenticação JWT",
-                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
-                        }
-                    }
-                ],
+                "parameters": [],
                 "responses": {
                     "200": {
                         "description": "Retorna todos os serviços cadastrados ou null caso não haja serviços.",
@@ -663,23 +663,7 @@
                 ],
                 "summary": "Cria um novo agendamento",
                 "description": "Cria um agendamento, vindo do cliente e envia um email notificando o provedor",
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "description": "Token de autenticação JWT",
-                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
-                        }
-                    }
-                ],
+                "parameters": [],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -725,23 +709,7 @@
                     "Agendamento"
                 ],
                 "summary": "Homologa o agendamento como realizado",
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "description": "Token de autenticação JWT",
-                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJzZW5oYSI6InN0cmluZyIsInJ1bGUiOiJhZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzMxMjUyODQ2LCJleHAiOjE3MzEyNjAwNDZ9.lZjjeIb5Fb2BnOEhhajACsMDLMwo8jeCOh-ICN7a-nQ"
-                        }
-                    }
-                ],
+                "parameters": [],
                 "requestBody": {
                     "required": true,
                     "content": {

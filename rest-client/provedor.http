@@ -19,5 +19,6 @@ POST http://localhost:3000/provedor/login
 Content-Type: application/json
 
 {
-
+    "email": "brenoluisadv@gmail.com",
+    "senha": "123"
 }

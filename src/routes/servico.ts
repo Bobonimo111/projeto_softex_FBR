@@ -11,15 +11,15 @@ const router = express.Router();
  */
 router.post("/criar", tokenCheck.administrador, servicoController.criarServico);
 
-router.post("/definir", servicoController.definirServicoParaProvedor);
+router.post("/definir", tokenCheck.administrador, servicoController.definirServicoParaProvedor);
 
-router.get("/get", tokenCheck.administrador, servicoController.getAll);
+router.get("/get", servicoController.getAll);
 
 router.get("/get/:servicoId", servicoController.getById);
 
-router.put("/editar", servicoController.update);
+router.put("/editar", tokenCheck.administrador, servicoController.update);
 
-router.delete("/deletar", servicoController.remove);
+router.delete("/deletar", tokenCheck.administrador, servicoController.remove);
 
 router.get("/teste", servicoController.teste);
 

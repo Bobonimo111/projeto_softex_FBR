@@ -4,6 +4,8 @@
 
 ## CONFIGURAÇÕES INICIAIS
 
+Com o node instalado
+
 `npm install`
 Para instalar todas as dependencias
 
@@ -12,6 +14,8 @@ Modificar o arquivo .env.exemplo, é recomendado definir a variavel PORT como 30
 acessar a documentação dos [end-points](<http://localhost:3000/docs/>)
 
 ## Teste
+
+___Você pode optar por utilizar as requisições ja prontas na pasta rest-cliente___
 
 1 - criar uma conta de adm
 
@@ -30,6 +34,8 @@ acessar a documentação dos [end-points](<http://localhost:3000/docs/>)
 8 - se tiver tudo ok o provedor ira receber um email, avisando para entrar em contato com o cliente.
 
 <span style="color:red;">Um email sera enviado ao primeiro provedor que for encontrado com esse serviço</span>
+
+___Todo login retorna um hash mas so o adm esta sendo utilizado nas rotas com middlwares___
 
 ## Comandos
 
