@@ -1,6 +1,7 @@
 //CADASTRAR PROVEDOR
 POST http://localhost:3000/provedor/cadastro
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTQ0NzcyMiwiZXhwIjoxNzMxNDU0OTIyfQ.JsKDk72zJKl3qhwx_A_zwFElLP4uL79dJPs5Yj-_Czk
 
 {
     "nome":"Breno",

@@ -2,6 +2,35 @@
 
 > Projeto criado com intuito de servir como a finalização da terceira edição do FAP pernambuco.
 
+## CONFIGURAÇÕES INICIAIS
+
+`npm install`
+Para instalar todas as dependencias
+
+Modificar o arquivo .env.exemplo, é recomendado definir a variavel PORT como 3000.
+
+acessar a documentação dos [end-points](<http://localhost:3000/docs/>)
+
+## Teste
+
+1 - criar uma conta de adm
+
+2 - logar como adm e copiar o hash
+
+3 - criar um serviço, enviado o hash no cabecalho
+
+4 - criar um provedor
+
+5 - definir o serviço para o provedor, passando o id do serviço e do provedor ou provedores.
+
+6 - criar um cliente.
+
+7 - realizar um agendamento passando o id de cliente e serviço.
+
+8 - se tiver tudo ok o provedor ira receber um email, avisando para entrar em contato com o cliente.
+
+<span style="color:red;">Um email sera enviado ao primeiro provedor que for encontrado com esse serviço</span>
+
 ## Comandos
 
 ## `npm install`
@@ -24,49 +53,6 @@ Iniciar o servidor em produção, deve ser compilado antes
 
 ## ROTAS
 
-**Todas as rotas seguem pelo seu caminho default**.
-_**Exemplo /adminitrador/login**_
-
-- DEV : EM desenvolvimento
-- OK : Tudo funcionando
-- CAMPO VAZIO : nada foi feito para essa rota
-
-### cliente
-
-| ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
-|------|------|-------|-------|-------|
-|/cadastro      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|OK||
-|/login   |POST     |BODY:email,senha |DEV|Criar sessão ao logar|
-
-### provedor
-
-| ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
-|------|------|-------|-------|-------|
-|/cadastrar      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|DEV|Definir que Apenas um adm poder um provedor|
-|/login   |POST     |BODY:email,senha |DEV|Criar sessão ao logar|
-|/cronograma   |GET     |HEAD:Authorization token, provedorId |DEV|CRIAR|
-
-### administrador
-
-| ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
-|------|------|-------|-------|-------|
-|/cadastrar      |POST      |BODY: nome, cpf, sexo,  email, senha, cnpj|DEV|Definir que Apenas um adm poder criar outro adm|
-|/login   |POST     |BODY:email,senha |DEV|Criar sessão ao logar|
-
-### servico
-
-| ROTA | TIPO | PARAMETROS |STATUS|OQ FALTA|
-|------|------|-------|-------|-------|
-|/cadastrar      |POST      |BODY:nome,descricao|OK||
-|/get   |PUT      |NONE|OK||
-|/get/:id      |PUT   |URL:servicoId     |OK||
-|/editar      |PUT   |BODY:nome?,descricao?|OK||
-|/deletar      |PUT   |BODT:provedorId,servicoId|OK||
-
-### agendamento
-
-| ROTA | TIPO | PARAMETROS |STATUS|
-|------|------|-------|-------|
-|/novo      |POST      |BODY: data,hora,servicoId,clienteId |OK|
-|/   |PUT      |BODY: data,hora,servicoId,clienteId       ||
-|/cancelar/:id      |PUT   |URL:agedamentoId      ||
+Para visualizar os end-points acessar
+dependo da porta que for definida no .env
+<http://localhost:3000/docs/>
