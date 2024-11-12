@@ -1,12 +1,36 @@
+###FAZER UM NOVO AGENDAMENTO
 POST  http://localhost:3000/agendamento/novo
 Content-Type: application/json
 
 {
-    "hora":"12:00",
-    "data":"2024-12-20",
     "servicoId":"1",
     "clienteId":"1"
-    //Hash de persmissão de cliente
+    //O email não vai chegar ja que o TRIAL FREE ACABOU
+}
+
+###BUSCAR AGENDAMENTOS 
+GET http://localhost:3000/agendamento/1
+Content-Type: application/json
+
+{
+
+}
+###
+//definir a data em que o agendamento foi realizado
+PUT http://localhost:3000/agendamento/realizado
+Content-Type: application/json
+
+{
+    "agendamentoId":1
+}
+
+###
+//Cancelar agendamento
+PUT http://localhost:3000/agendamento/cancelar
+Content-Type: application/json
+
+{
+    "agendamentoId":1
 }
 
 ###

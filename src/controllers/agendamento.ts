@@ -6,6 +6,7 @@ import provedorModel from "../models/Provedor"
 import ServicoModel from "../models/Servico"
 import agendamentoModel from "../models/Agendamento"
 import ProvedorServicoModel from "../models/ProvedorServico";
+
 // import axios from "axios";
 /**
  * Rota para criar novo agendamento post 
@@ -67,52 +68,118 @@ const solicitarNovoAgendamento = async (req: Request, res: Response) => {
         res.send({ msg: err }).status(500);
     }
 }
-//NOTA: ESSA CAMPO DEVE RECEBER UM ID
-//ESSA ROTA DEVE SER ACESSADA APENAS POR UMA ROTA DE RESPOSTA
-//ESSA PAGINA DEVE CONTER O ID DO AGENDAMENTO, PARA CARREGAR O MESMO
+//confirma que o agendamento, ja foi feito
 const modificarAgendamento = (req: Request, res: Response) => {
-    const requisicao = {
-        data: req.body.data,
-        hora: req.body.hora,
-        id: req.body.agendamentoId,
-    }
-    agendamentoModel.findByPk(requisicao.id)
-        //Terminar isso aqui
-        .then(AgendamentoDataRequest => {
-            if (AgendamentoDataRequest == undefined) {
-                //Retorno de agendamento não existe no banco de dados
-            } else {
-                AgendamentoDataRequest.data = AgendamentoDataRequest.data == requisicao.data || AgendamentoDataRequest.data == undefined ? AgendamentoDataRequest.data : requisicao.data
+    try {
+
+        const requisicao = {
+            id: req.body.agendamentoId
+        }
+        Object.keys(requisicao).forEach((value) => {
+            //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
+            if (requisicao[value] == undefined || requisicao[value] == "") {
+                res.setHeader("content-type", "application/json")
+                return res.send({ msg: "Not make requisition, " + value + " is undefined" }).status(406);
             }
         })
+        agendamentoModel.findByPk(requisicao.id)
+            //Terminar isso aqui
+            .then(AgendamentoDataRequest => {
+                if (!AgendamentoDataRequest) {
+                    res.setHeader('content-type', "application/json");
+                    return res.send(null).status(200).end();
+                } else {
+
+                    //CHATGPT
+                    const agora = new Date();
+                    const horas = agora.getHours();
+                    const minutos = agora.getMinutes();
+                    const mes = String(agora.getMonth() + 1).padStart(2, '0');
+                    const dia = String(agora.getDate()).padStart(2, '0');
+                    const ano = agora.getFullYear();
+                    const dataFormatoAmericano = `${mes}/${dia}/${ano}`;
+                    // AgendamentoDataRequest.data = new Date(dataFormatoAmericano);
+                    // AgendamentoDataRequest.hora = `${horas}:${minutos}`;
+                    AgendamentoDataRequest.update({
+                        data: new Date(dataFormatoAmericano),
+                        hora: `${horas}:${minutos}`,
+                        status: "realizado"
+                    })
+                    res.setHeader("content-type", "application/json");
+                    return res.send(AgendamentoDataRequest).status(200).end();
+                }
+            })
+    } catch (erro) {
+        res.setHeader('content-type', "application/json");
+        return res.send(erro).status(500).end();
+    }
 
 }
 
 const cancelarAgendamento = (req: Request, res: Response) => {
-
-}
-
-const getById = (req: Request, res: Response) => {
-    let requisicao = {
-        agendamentoId: req.params.id
-    }
-    //o agendamento so pode ser finalizado pelo provedor que recebeu o pedido
-    //o ao ser finalizado, deve ser posto data e hora da finalização.
     try {
-        agendamentoModel.findByPk(requisicao.agendamentoId)
-            .then(agendamentoDateRequest => {
-                if (agendamentoDateRequest) {
-                    res.setHeader("content-type", "application/json");
-                    res.send(agendamentoDateRequest).status(200);
+        const requisicao = {
+            id: req.body.agendamentoId
+        }
+        Object.keys(requisicao).forEach((value) => {
+            //Se qualquer campo for vazio ou undefined retornara um erro se ele for diferente de descrição que é opcional
+            if (requisicao[value] == undefined || requisicao[value] == "") {
+                res.setHeader("content-type", "application/json")
+                return res.send({ msg: "Not make requisition, " + value + " is undefined" }).status(406);
+            }
+        })
+        agendamentoModel.findByPk(requisicao.id)
+            //Terminar isso aqui
+            .then(AgendamentoDataRequest => {
+                if (!AgendamentoDataRequest) {
+                    res.setHeader('content-type', "application/json");
+                    return res.send(null).status(200).end();
                 } else {
+
+                    //CHATGPT
+                    const agora = new Date();
+                    const horas = agora.getHours();
+                    const minutos = agora.getMinutes();
+                    const mes = String(agora.getMonth() + 1).padStart(2, '0');
+                    const dia = String(agora.getDate()).padStart(2, '0');
+                    const ano = agora.getFullYear();
+                    const dataFormatoAmericano = `${mes}/${dia}/${ano}`;
+                    // AgendamentoDataRequest.data = new Date(dataFormatoAmericano);
+                    // AgendamentoDataRequest.hora = `${horas}:${minutos}`;
+                    AgendamentoDataRequest.update({
+                        status: "cancelado"
+                    })
                     res.setHeader("content-type", "application/json");
-                    res.send({ "msg": "Sem agendamento no id" }).status(206);
+                    return res.send(AgendamentoDataRequest).status(200).end();
                 }
             })
-    } catch (err) {
-
+    } catch (erro) {
+        res.setHeader('content-type', "application/json");
+        return res.send(erro).status(500).end();
     }
 }
+
+// const getById = (req: Request, res: Response) => {
+//     let requisicao = {
+//         agendamentoId: req.params.id
+//     }
+//     //o agendamento so pode ser finalizado pelo provedor que recebeu o pedido
+//     //o ao ser finalizado, deve ser posto data e hora da finalização.
+//     try {
+//         agendamentoModel.findByPk(requisicao.agendamentoId)
+//             .then(agendamentoDateRequest => {
+//                 if (agendamentoDateRequest) {
+//                     res.setHeader("content-type", "application/json");
+//                     res.send(agendamentoDateRequest).status(200);
+//                 } else {
+//                     res.setHeader("content-type", "application/json");
+//                     res.send({ "msg": "Sem agendamento no id" }).status(206);
+//                 }
+//             })
+//     } catch (err) {
+
+//     }
+// }
 //TEste de envio de emails
 // app.get("/emailTest", (req: Request, res: Response) => {
 //     const host = process.env.SMTP_HOST;
@@ -123,5 +190,60 @@ const getById = (req: Request, res: Response) => {
 //     email.init();
 //     email.send(email.mailOptions("Carlosmaycon443@gmail.com", "Apenas mais um teste qualquer", "<h1>ISSO É UM EMAIL DE TESTE DO FBR DIGITAL</h1>"))
 // })
-
-export { solicitarNovoAgendamento, modificarAgendamento, cancelarAgendamento };
+const verAgendamentos = (req: Request, res: Response) => {
+    agendamentoModel.findAll()
+        .then(agendamentoRequestModel => {
+            if (agendamentoRequestModel == undefined) {
+                res.setHeader("content-type", "application/json");
+                return res.send(null).status(200).end()
+            } else {
+                res.setHeader("content-type", "application/json");
+                return res.send(agendamentoRequestModel).status(200).end()
+            }
+        }).catch(err => {
+            res.setHeader("content-type", "application/json");
+            return res.send(err).status(500).end()
+        })
+}
+const verAgendamentoPorId = (req: Request, res: Response) => {
+    console.log("POR ID DE AGENDAMENTO ")
+    const requisicao = {
+        agendamentoId: req.params.agendamentoId
+    }
+    agendamentoModel.findByPk(requisicao.agendamentoId)
+        .then(agendamentoRequestModel => {
+            if (agendamentoRequestModel == undefined) {
+                res.setHeader("content-type", "application/json");
+                return res.send(null).status(200).end();
+            } else {
+                res.setHeader("content-type", "application/json");
+                return res.send(agendamentoRequestModel).status(200).end();
+            }
+        })
+        .catch(err => {
+            res.setHeader("content-type", "application/json");
+            return res.send(err).status(500).end()
+        })
+}
+const verAgendamentosFiltradoPorProvedor = (req: Request, res: Response) => {
+    console.log("POR ID DE PROVEDOR ")
+    const requisicao = {
+        provedorId: req.params.provedorId
+    }
+    agendamentoModel.findAll({
+        where: { provedorId: requisicao.provedorId }
+    })
+        .then(agendamentoDataRequest => {
+            if (agendamentoDataRequest == undefined) {
+                res.setHeader("content-type", "application/json");
+                return res.send(null).status(200).end();
+            } else {
+                res.setHeader("content-type", "application/json");
+                return res.send(agendamentoDataRequest).status(200).end();
+            }
+        }).catch(err => {
+            res.setHeader("content-type", "application/json");
+            return res.send(err).status(500).end()
+        })
+}
+export { solicitarNovoAgendamento, modificarAgendamento, cancelarAgendamento, verAgendamentos, verAgendamentoPorId, verAgendamentosFiltradoPorProvedor };

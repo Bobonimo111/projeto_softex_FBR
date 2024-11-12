@@ -48,7 +48,7 @@ app.use(session({
 }));
 
 //Configuração de rotas
-app.use("", viewRouter);
+app.use("/view", viewRouter);
 app.use("/cliente", clienteRouter);
 app.use("/provedor", provedorRouter);
 app.use("/agendamento", agendamentoRouter);

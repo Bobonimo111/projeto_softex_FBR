@@ -9,6 +9,10 @@ import * as agendamentoController from "../controllers/agendamento"
 
 router.post("/novo", agendamentoController.solicitarNovoAgendamento);
 router.put("/realizado", agendamentoController.modificarAgendamento);
-router.put("/cancelar",)
+
+router.get("/", agendamentoController.verAgendamentos);
+router.get("/:agendamentoId", agendamentoController.verAgendamentoPorId);
+router.get("/provedor/:provedorId", agendamentoController.verAgendamentosFiltradoPorProvedor);
+router.put("/cancelar", agendamentoController.cancelarAgendamento);
 
 export default router;

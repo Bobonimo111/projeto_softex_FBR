@@ -589,7 +589,7 @@
             }
         },
         "/servico/editar": {
-            "post": {
+            "put": {
                 "tags": [
                     "Servicos"
                 ],
@@ -749,24 +749,14 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "data": {
-                                        "type": "string"
-                                    },
-                                    "hora": {
-                                        "type": "string"
-                                    },
                                     "agendamentoId": {
                                         "type": "string"
                                     }
                                 },
                                 "required": [
-                                    "data",
-                                    "hora",
                                     "agendamentoId"
                                 ],
                                 "example": {
-                                    "data": "yyyy/mm/dd formato americano",
-                                    "hora": "16:50 Formato 24horas",
                                     "agendamentoId": "1"
                                 }
                             }
@@ -779,6 +769,153 @@
                     },
                     "406": {
                         "description": "Not make requisition, value is undefined"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/agendamento/": {
+            "get": {
+                "tags": [
+                    "Agendamento"
+                ],
+                "summary": "Obter todos os agendamento cadastrados",
+                "description": "Retorna todos os agendamentos cadastrados no banco de dados. Se não houver agendamentos, retorna null.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Retorna todos os agendamentos cadastrados ou null caso não haja agendamentos.",
+                        "example": [
+                            {
+                                "id": 1,
+                                "data": "2024-11-12T03:00:00.000Z",
+                                "hora": "10:16",
+                                "servicoId": 1,
+                                "clienteId": 1,
+                                "provedorId": 1,
+                                "status": "cancelado",
+                                "createdAt": "2024-11-12T13:15:37.811Z",
+                                "updatedAt": "2024-11-12T13:16:17.323Z"
+                            },
+                            {
+                                "id": 2,
+                                "data": "null",
+                                "hora": "null",
+                                "servicoId": 2,
+                                "clienteId": 2,
+                                "provedorId": 3,
+                                "status": "pendente",
+                                "createdAt": "2024-11-12T13:15:37.811Z",
+                                "updatedAt": "2024-11-12T13:16:17.323Z"
+                            }
+                        ]
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/agendamento/{agendamentoId}": {
+            "get": {
+                "tags": [
+                    "Agendamento"
+                ],
+                "summary": "Retorna um agendamento especifico por id",
+                "description": "Retorna um agendamento especifico por id Se não houver agendamentos, retorna null.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Retorna um agendamento especifico por id.",
+                        "example": [
+                            {
+                                "id": 1,
+                                "data": "2024-11-12T03:00:00.000Z",
+                                "hora": "10:16",
+                                "servicoId": 1,
+                                "clienteId": 1,
+                                "provedorId": 1,
+                                "status": "cancelado",
+                                "createdAt": "2024-11-12T13:15:37.811Z",
+                                "updatedAt": "2024-11-12T13:16:17.323Z"
+                            }
+                        ]
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/agendamento/provedor/{provedorId}": {
+            "get": {
+                "tags": [
+                    "Agendamento"
+                ],
+                "summary": "Retorna um agendamento especifico por id de provedor",
+                "description": "Retorna um agendamento especifico por id de provedor, Se não houver agendamentos, retorna null.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Retorna um agendamento especifico por id de provedor.",
+                        "example": [
+                            {
+                                "id": 1,
+                                "data": "2024-11-12T03:00:00.000Z",
+                                "hora": "10:16",
+                                "servicoId": 1,
+                                "clienteId": 1,
+                                "provedorId": 1,
+                                "status": "cancelado",
+                                "createdAt": "2024-11-12T13:15:37.811Z",
+                                "updatedAt": "2024-11-12T13:16:17.323Z"
+                            }
+                        ]
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/agendamento/cancelar": {
+            "put": {
+                "tags": [
+                    "Agendamento"
+                ],
+                "summary": "Retorna um agendamento especifico por id",
+                "description": "Retorna um agendamento especifico por id Se não houver agendamentos, retorna null.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Retorna um agendamento especifico por id.",
+                        "example": [
+                            {
+                                "id": 1,
+                                "data": "2024-11-12T03:00:00.000Z",
+                                "hora": "10:16",
+                                "servicoId": 1,
+                                "clienteId": 1,
+                                "provedorId": 1,
+                                "status": "cancelado",
+                                "createdAt": "2024-11-12T13:15:37.811Z",
+                                "updatedAt": "2024-11-12T13:16:17.323Z"
+                            }
+                        ]
+                    },
+                    "204": {
+                        "description": "null"
                     },
                     "500": {
                         "description": "Erro interno no servidor"

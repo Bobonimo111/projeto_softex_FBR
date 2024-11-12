@@ -149,61 +149,35 @@ const getAll = (req: Request, res: Response) => {
 }
 const update = (req: Request, res: Response) => {
     try {
-        //A requisição mista com body sendo o id de provedor, e a querry sendo o id de servico
-        //Requisição do tipo body por meio do provedor
-        //ENVIA UMA REQUISIÇÃO DO TIPO PUT
-        //PRECISA DE UM BODY COM A DESCRIÇÃO,NOME,PROVEDORID E SERVICOID;
-        //SE O NOME OU A DESCRIÇÃO ESTIVEREM VAZIAS, VAI SER MANTIDO O VALOR ATUAL NO DB;
-        let requisicao = {
+
+        const requisicao = {
             nome: req.body.nome,
             descricao: req.body.descricao,
-            provedorId: req.body.provedorId,
             servicoId: req.body.servicoId
         }
         //Adicionar os catches de ERRO e O else de undefined se não encontrados
-        ProvedorServicoModel
-            .findAll(
-                {
-                    where:
-                    {
-                        provedorId: requisicao.provedorId
-                    }
-                })
-            .then(ProvedorServicoDataRequest => {
-                if (ProvedorServicoDataRequest == undefined) {
-                    //provedor não encontrado
-                    res.setHeader("content-type", "application/json")
-
-                    res.send({ msg: "Provedor não encontrado no banco de dados" }).status(406).end();
+        servicoModel.findByPk(requisicao.servicoId)
+            .then(ServicoDataRequest => {
+                if (ServicoDataRequest == undefined) {
+                    res.setHeader("content-type", "application/json");
+                    res.send({ msg: "serviço não encontrado" }).status(204).end();
                 } else {
-                    let isServicoId = ProvedorServicoDataRequest.some(obj => obj.id == requisicao.servicoId);
-                    //O serviço esta presente no sistema daquele fornecedor
-                    if (isServicoId) {
-                        servicoModel.findByPk(requisicao.servicoId)
-                            .then(ServicoDataRequest => {
-                                if (ServicoDataRequest == undefined) {
-                                    res.setHeader("content-type", "application/json");
-                                    res.send({ msg: "serviço não encontrado" }).status(204).end();
-                                } else {
-                                    ServicoDataRequest.descricao = requisicao.descricao == undefined || requisicao.descricao == "" ? ServicoDataRequest.descricao : requisicao.descricao;
-                                    ServicoDataRequest.nome = requisicao.nome == undefined || requisicao.nome == "" ? ServicoDataRequest.nome : requisicao.nome;
+                    // ServicoDataRequest.descricao = requisicao.descricao == undefined || requisicao.descricao == "" ? ServicoDataRequest.descricao : requisicao.descricao;
+                    // ServicoDataRequest.nome = requisicao.nome == undefined || requisicao.nome == "" ? ServicoDataRequest.nome : requisicao.nome;
+                    ServicoDataRequest.update({
+                        nome: requisicao.nome == undefined || requisicao.nome == "" ? ServicoDataRequest.nome : requisicao.nome,
+                        descricao: requisicao.descricao == undefined || requisicao.descricao == "" ? ServicoDataRequest.descricao : requisicao.descricao,
+                    });
+                    //res.send(ServicoDataRequest)
+                    return res.send({ msg: "Servico atualizado" }).status(200).end();
 
-                                    res.send({ msg: "Servico atualizado" }).status(200).end();
-                                    //res.send(ServicoDataRequest)
-                                    return ServicoDataRequest.save();
-
-
-                                }
-                            })
-                        //O serviço não esta presente
-                    } else {
-                        res.setHeader("content-type", "application/json");
-
-                        res.send({ msg: "serviço não encontrado" }).status(204).end();
-                    }
                 }
+                //O serviço não esta presente
             })
+        //O serviço esta presente no sistema daquele fornecedor
+
     } catch (err) {
+        console.log("catch")
         res.setHeader("content-type", "application/json");
         res.send({ msg: err }).status(500);
     }

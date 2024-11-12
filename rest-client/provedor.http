@@ -3,10 +3,10 @@ POST http://localhost:3000/provedor/cadastro
 Content-Type: application/json
 
 {
-    "nome":"William",
+    "nome":"Breno",
     "cpf":"none",
     "sexo": "m",
-    "email": "carlosmaycon443@gmail.com",
+    "email": "brenoluisadv@gmail.com",
     "senha": "123",
     "cnpj": ""
     //Adicionar ser possivel apenas com token de adm
