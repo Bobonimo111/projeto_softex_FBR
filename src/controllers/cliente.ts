@@ -35,6 +35,7 @@ function cadastro(req: Request, res: Response) {
         email: req.body.email,
         senha: req.body.senha,
         cnpj: req.body.cnpj, //PODE SER VAZIO
+        telefone: req.body.telefone,
         role: "cliente"
     }
     generics.cadastro(req, res, requisicao, userModel, clienteModel);

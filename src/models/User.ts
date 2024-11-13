@@ -7,6 +7,7 @@ interface UserAttributes {
     sexo: string;
     email: string;
     senha: string;
+    telefone: string;
     createdAt?: Date;
     updatedAt?: Date;
     cnpj: string;
@@ -19,6 +20,7 @@ class User extends Model<UserAttributes> implements UserAttributes {
     declare sexo: string;
     declare email: string;
     declare senha: string;
+    declare telefone: string;
     declare readonly createdAt: Date;
     declare readonly updatedAt: Date;
     declare cnpj: string;
@@ -46,6 +48,10 @@ User.init(
         senha: {
             type: DataTypes.STRING(15),
             allowNull: false,
+        },
+        telefone: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         createdAt: {
             type: DataTypes.DATE,

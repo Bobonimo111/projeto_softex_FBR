@@ -7,6 +7,7 @@ Content-Type: application/json
     "cpf":"000.000.000-00",
     "sexo":"m",
     "email":"carlosmaycon443@gmail.com",
+    "telefone":"(81) 9 9999-9999",
     "senha":"1234",
     "cnpj":""
 }

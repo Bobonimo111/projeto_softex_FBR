@@ -54,19 +54,17 @@ class Email {
         }
     }
 
-    public templateNovaRequisicao(provedor: String, servico: String, data: String, hora: String) {
+    public templateNovaRequisicao(provedor: String, servico: String, data: String, hora: String, telefone) {
         let htmlTemplate: String =
             `<h1>${provedor} você possui uma nova requisição</h1>
         <hr>
 <div>
     <ul>
         <li>Serviço : ${servico} </li>
-        <li>Data : ${data} </li>
-        <li>Hora : ${hora} </li>
+        </li>Telefone :${telefone}</li>
+        <p>entre em contato com o cliente para acertarem o encontro</p>
     </ul>
 <hr>
-<p style="font-size:15px;color:red;">Clique no botão abaixo para confirmar sugerir alterações</p>
-<a href=""><button>CONFIRMAR</button></a>
 </div>`
         let plainText: String = `${provedor} você possui uma nova requisição, Serviço : ${servico}, Data : ${data}, Hora : ${hora}`
 

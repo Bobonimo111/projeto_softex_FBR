@@ -1,13 +1,14 @@
 //CADASTRAR PROVEDOR
 POST http://localhost:3000/provedor/cadastro
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTQ0NzcyMiwiZXhwIjoxNzMxNDU0OTIyfQ.JsKDk72zJKl3qhwx_A_zwFElLP4uL79dJPs5Yj-_Czk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTUxMzA4OCwiZXhwIjoxNzMxNTIwMjg4fQ.AMK8NrHYuCyD0H6japOpYu993rdqbAwpCYxyxSHBZlk
 
 {
     "nome":"Breno",
     "cpf":"none",
     "sexo": "m",
     "email": "brenoluisadv@gmail.com",
+    "telefone":"(81) 9 9999-9999",
     "senha": "123",
     "cnpj": ""
     //Adicionar ser possivel apenas com token de adm

@@ -53,7 +53,7 @@ const solicitarNovoAgendamento = async (req: Request, res: Response) => {
             } else {
                 let email: Email = new Email(process.env.SMTP_USER, process.env.SMTP_PASS, process.env.SMTP_HOST);
                 email.init()
-                let templates = email.templateNovaRequisicao(provedorUser?.nome, servico?.nome, agendamentoDataRequest.data, agendamentoDataRequest.hora);
+                let templates = email.templateNovaRequisicao(provedorUser?.nome, servico?.nome, agendamentoDataRequest.data, agendamentoDataRequest.hora, clienteUser?.telefone);
                 let mailOptions = email.mailOptions(provedorUser?.email, "AGENDAMENTO DE SERVIÇO", templates.htmlTemplate, templates.plainText);
                 email.send(mailOptions);
                 res.send("OK agendametno realizado").status(200);
