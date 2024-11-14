@@ -7,9 +7,15 @@ Content-Type: application/json
     "clienteId":"1"
     //O email não vai chegar ja que o TRIAL FREE ACABOU
 }
-
-###BUSCAR AGENDAMENTOS 
+###BUSCAR AGENDAMENTO
 GET http://localhost:3000/agendamento/1
+Content-Type: application/json
+
+{
+
+}
+###BUSCAR AGENDAMENTOS 
+GET http://localhost:3000/agendamento/
 Content-Type: application/json
 
 {
@@ -21,7 +27,7 @@ PUT http://localhost:3000/agendamento/realizado
 Content-Type: application/json
 
 {
-    "agendamentoId":1
+    "agendamentoId":5
 }
 
 ###
@@ -30,7 +36,7 @@ PUT http://localhost:3000/agendamento/cancelar
 Content-Type: application/json
 
 {
-    "agendamentoId":1
+    "agendamentoId":5
 }
 
 ###

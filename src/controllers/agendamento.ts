@@ -89,24 +89,29 @@ const modificarAgendamento = (req: Request, res: Response) => {
                     res.setHeader('content-type', "application/json");
                     return res.send(null).status(200).end();
                 } else {
+                    if (AgendamentoDataRequest.status == "cancelado") {
+                        res.setHeader('content-type', "application/json");
+                        return res.send({ "msg": "ERRO", "msg2": "agendamento cancelado, não pode ser modificado" }).status(200).end();
+                    } else {
 
-                    //CHATGPT
-                    const agora = new Date();
-                    const horas = agora.getHours();
-                    const minutos = agora.getMinutes();
-                    const mes = String(agora.getMonth() + 1).padStart(2, '0');
-                    const dia = String(agora.getDate()).padStart(2, '0');
-                    const ano = agora.getFullYear();
-                    const dataFormatoAmericano = `${mes}/${dia}/${ano}`;
-                    // AgendamentoDataRequest.data = new Date(dataFormatoAmericano);
-                    // AgendamentoDataRequest.hora = `${horas}:${minutos}`;
-                    AgendamentoDataRequest.update({
-                        data: new Date(dataFormatoAmericano),
-                        hora: `${horas}:${minutos}`,
-                        status: "realizado"
-                    })
-                    res.setHeader("content-type", "application/json");
-                    return res.send(AgendamentoDataRequest).status(200).end();
+                        //CHATGPT
+                        const agora = new Date();
+                        const horas = agora.getHours();
+                        const minutos = agora.getMinutes();
+                        const mes = String(agora.getMonth() + 1).padStart(2, '0');
+                        const dia = String(agora.getDate()).padStart(2, '0');
+                        const ano = agora.getFullYear();
+                        const dataFormatoAmericano = `${mes}/${dia}/${ano}`;
+                        // AgendamentoDataRequest.data = new Date(dataFormatoAmericano);
+                        // AgendamentoDataRequest.hora = `${horas}:${minutos}`;
+                        AgendamentoDataRequest.update({
+                            data: new Date(dataFormatoAmericano),
+                            hora: `${horas}:${minutos}`,
+                            status: "realizado"
+                        })
+                        res.setHeader("content-type", "application/json");
+                        return res.send(AgendamentoDataRequest).status(200).end();
+                    }
                 }
             })
     } catch (erro) {
