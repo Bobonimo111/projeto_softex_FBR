@@ -78,4 +78,7 @@ function getAll(req: Request, res: Response) {
 }
 // function atualizar()
 
-export { login, cadastro, getAll };
+function getById(req: Request, res: Response) {
+    generics.getById(req, res, userModel, clienteModel);
+}
+export { login, cadastro, getAll, getById };

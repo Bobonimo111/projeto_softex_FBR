@@ -22,8 +22,16 @@ Content-Type: application/json
 }
 
 ### 
-//Puxar todos os adms do banco de dados
+//Puxar todos os ADMS do banco de dados
 GET  http://localhost:3000/administrador/
+Content-Type: application/json
+
+{
+    
+}
+### 
+//Puxar um adm por id
+GET  http://localhost:3000/administrador/7
 Content-Type: application/json
 
 {

@@ -69,10 +69,13 @@ function getAll(req: Request, res: Response) {
     generics.getAll(req, res, userModel, provedorModel);
 }
 
+function getById(req: Request, res: Response) {
+    generics.getById(req, res, userModel, provedorModel);
+}
 /*MID FUNCIONA*/
 // function test(req: Request, res: Response) {
 //     console.log("Middleware funcionando")
 //     res.send("ENTROU COM MID")
 // }
 
-export { login, cadastro, getByServiceId, getAll };
+export { login, cadastro, getByServiceId, getAll, getById };

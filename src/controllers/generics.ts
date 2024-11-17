@@ -122,4 +122,36 @@ const getAll = function <UserModel, RoleModel>(req: Request, res: Response, user
             return res.send({ msg: err }).status(500);
         });
 }
-export { cadastro, login, getAll };
+const getById = function <UserModel, RoleModel>(req: Request, res: Response, userModel: UserModel, roleModel: RoleModel) {
+    roleModel.findAll()
+        .then((roleDataRequest) => {
+            try {
+                let ids: number[] = roleDataRequest.map(objeto => objeto.userId);
+                let id: number = Number(req.params.id);
+                if (!ids.includes(id)) {
+                    res.setHeader("content-type", "application/json");
+                    return res.send({ msg: "não encontrado" }).status(400);
+                } else {
+                    userModel.findByPk(id)
+                        .then(userDataRequest => {
+                            console.log("achou alguma coisa util")
+                            res.setHeader("content-type", "application/json");
+                            return res.send({ userDataRequest }).status(200);
+                        }).catch((err) => {
+                            res.setHeader("content-type", "application/json");
+                            return res.send({ msg: err }).status(500);
+                        })
+                }
+            } catch (err) {
+                res.setHeader("content-type", "application/json");
+                return res.send({ msg: err }).status(500);
+            }
+
+        }).catch((err) => {
+            res.setHeader("content-type", "application/json");
+            return res.send({ msg: err }).status(500);
+        });
+}
+
+
+export { cadastro, login, getAll, getById };

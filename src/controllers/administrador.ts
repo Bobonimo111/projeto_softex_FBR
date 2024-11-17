@@ -31,7 +31,11 @@ function cadastro(req: Request, res: Response) {
 };
 
 function getAll(req: Request, res: Response) {
-    generics.getAll(req, res, userModel, administradorModel)
+    generics.getAll(req, res, userModel, administradorModel);
 }
 
-export { login, cadastro, getAll };
+function getById(req: Request, res: Response) {
+    generics.getById(req, res, userModel, administradorModel);
+}
+
+export { login, cadastro, getAll, getById };

@@ -29,4 +29,10 @@ Content-Type: application/json
 
 }
 
-###
+### PUXAR UM CLIENTE POR ID 
+GET http://localhost:3000/cliente/2
+Content-Type: application/json
+
+{
+
+}

@@ -9,6 +9,8 @@ router.post("/cadastro", clienteController.cadastro);
 
 router.get("/", clienteController.getAll);
 
+router.get("/:id", clienteController.getById);
+
 router.get("/test", (req: Request, res: Response) => {
     res.render("user");
 });

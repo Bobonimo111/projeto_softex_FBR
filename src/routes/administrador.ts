@@ -12,4 +12,6 @@ router.post("/login", administradorController.login);
 
 router.get("/", administradorController.getAll);
 
+router.get("/:id", administradorController.getById);
+
 export default router;

@@ -31,4 +31,11 @@ Content-Type: application/json
 {
     
 }
+###PROVEDOR POR ID
+GET http://localhost:3000/provedor/5
+Content-Type: application/json
+
+{
+    
+}
 ###
