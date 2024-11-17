@@ -7,6 +7,8 @@ router.post("/login", clienteController.login);
 
 router.post("/cadastro", clienteController.cadastro);
 
+router.get("/", clienteController.getAll);
+
 router.get("/test", (req: Request, res: Response) => {
     res.render("user");
 });

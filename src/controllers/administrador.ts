@@ -30,4 +30,8 @@ function cadastro(req: Request, res: Response) {
 
 };
 
-export { login, cadastro };
+function getAll(req: Request, res: Response) {
+    generics.getAll(req, res, userModel, administradorModel)
+}
+
+export { login, cadastro, getAll };

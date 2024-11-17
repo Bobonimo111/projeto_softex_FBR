@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "servicoId":"1",
-    "clienteId":"1"
+    "clienteId":"2"
     //O email não vai chegar ja que o TRIAL FREE ACABOU
 }
 ###BUSCAR AGENDAMENTO

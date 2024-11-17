@@ -73,6 +73,9 @@ function cadastro(req: Request, res: Response) {
     // })
 }
 
+function getAll(req: Request, res: Response) {
+    generics.getAll(req, res, userModel, clienteModel);
+}
 // function atualizar()
 
-export { login, cadastro };
+export { login, cadastro, getAll };

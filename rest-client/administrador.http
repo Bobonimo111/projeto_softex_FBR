@@ -20,3 +20,12 @@ Content-Type: application/json
     "email":"carlosmaycon443@gmail.com",
     "senha":"1234"
 }
+
+### 
+//Puxar todos os adms do banco de dados
+GET  http://localhost:3000/administrador/
+Content-Type: application/json
+
+{
+    
+}

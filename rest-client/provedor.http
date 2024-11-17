@@ -23,3 +23,12 @@ Content-Type: application/json
     "email": "brenoluisadv@gmail.com",
     "senha": "123"
 }
+###
+//PUXAR TODOS OS PROVEDORES
+GET http://localhost:3000/provedor
+Content-Type: application/json
+
+{
+    
+}
+###

@@ -11,8 +11,8 @@ import { sequelize } from "./models/DataBase";
 //Nomeando a rota user como clieteRouter para ser usada no main
 import clienteRouter from "./routes/cliente";
 import provedorRouter from "./routes/provedor"
-import agendamentoRouter from "./routes/agendamento"
 import servicoRouter from "./routes/servico";
+import agendamentoRouter from "./routes/agendamento"
 import administradorRouter from "./routes/administrador";
 import viewRouter from "./routes/views";
 
@@ -60,6 +60,7 @@ app.listen(process.env.port, () => {
     //INICIALIZAÇÃO DO BANCO DE DADOS
     sequelize.authenticate()
         .then(() => {
+
             console.log('Conexão com o banco de dados estabelecida com sucesso.');
             return sequelize.sync({ force: false }); // Sincroniza os modelos
         })

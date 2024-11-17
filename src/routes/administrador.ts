@@ -10,4 +10,6 @@ router.post("/cadastro", administradorController.cadastro);
 
 router.post("/login", administradorController.login);
 
+router.get("/", administradorController.getAll);
+
 export default router;

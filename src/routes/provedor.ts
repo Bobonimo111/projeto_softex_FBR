@@ -1,6 +1,5 @@
 import express from "express";
 const router = express.Router();
-import * as logger from "../middlewares/loggers";
 import * as provedorController from "../controllers/provedor";
 /**
  * Rotas:
@@ -16,7 +15,8 @@ router.post("/login", provedorController.login);
 router.post("/cadastro", provedorController.cadastro);
 
 /* Passo o id de um serviço e ele retorna os dados do provedor responsavel */
-router.get("/getByServiceId/:servicoId", provedorController.getByServiceId)
+router.get("/getByServiceId/:servicoId", provedorController.getByServiceId);
 
+router.get("/", provedorController.getAll);
 //router.get("/test", logger.provedor, provedorController.test);
 export default router;

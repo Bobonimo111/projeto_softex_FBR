@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+//User model é o UserModel e roleModel pode ser adminitradorModel clienteModel provedorModel
 const login = function <UserModel>(req: Request, res: Response, requisicao: any, userModel: UserModel,) {
     try {
         Object.keys(requisicao).forEach((value) => {
@@ -54,6 +55,7 @@ const login = function <UserModel>(req: Request, res: Response, requisicao: any,
     }
 }
 
+//User model é o UserModel e roleModel pode ser adminitradorModel clienteModel provedorModel
 const cadastro = function <UserModel, RoleModel>(req: Request, res: Response, requisicao: any, userModel: UserModel, roleModel: RoleModel) {
     try {
 
@@ -97,4 +99,27 @@ const cadastro = function <UserModel, RoleModel>(req: Request, res: Response, re
     }
 }
 
-export { cadastro, login };
+//User model é o UserModel e roleModel pode ser adminitradorModel clienteModel provedorModel
+const getAll = function <UserModel, RoleModel>(req: Request, res: Response, userModel: UserModel, roleModel: RoleModel) {
+    roleModel.findAll()
+        .then((roleDataRequest) => {
+            let ids = roleDataRequest.map(objeto => objeto.userId);
+            userModel.findAll(
+                {
+                    where: {
+                        id: ids
+                    }
+                }
+            ).then((userDataRequest) => {
+                res.setHeader("content-type", "application/json");
+                return res.send(userDataRequest).status(200);
+            }).catch((err) => {
+                res.setHeader("content-type", "application/json");
+                return res.send({ msg: err }).status(500);
+            });
+        }).catch((err) => {
+            res.setHeader("content-type", "application/json");
+            return res.send({ msg: err }).status(500);
+        });
+}
+export { cadastro, login, getAll };
