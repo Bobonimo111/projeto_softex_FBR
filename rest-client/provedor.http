@@ -1,13 +1,13 @@
 //CADASTRAR PROVEDOR
 POST http://localhost:3000/provedor/cadastro
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTU5NDE3OCwiZXhwIjoxNzMxNjAxMzc4fQ.ymHV6Hv3UROOAYOAlRaPoPHtltfTkuW_U-j-Ce4wgDQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTg0NzE5MywiZXhwIjoxNzMxODU0MzkzfQ.xmAl6azI5rd6Z6Or7lhu2ynTghEnBmOGGSNaDF3WH9s
 
 {
     "nome":"Breno",
     "cpf":"none",
     "sexo": "m",
-    "email": "brenoluisadv@gmail.com",
+    "email": "carlosmaycon443@gmail.com",
     "telefone":"(81) 9 9999-9999",
     "senha": "123",
     "cnpj": ""
@@ -20,7 +20,7 @@ POST http://localhost:3000/provedor/login
 Content-Type: application/json
 
 {
-    "email": "brenoluisadv@gmail.com",
+    "email": "carlosmaycon443@gmail.com",
     "senha": "123"
 }
 ###

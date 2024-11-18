@@ -1,22 +1,22 @@
 //CADASTRAR SERVIÇO
 POST http://localhost:3000/servico/criar
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTU5NDE3OCwiZXhwIjoxNzMxNjAxMzc4fQ.ymHV6Hv3UROOAYOAlRaPoPHtltfTkuW_U-j-Ce4wgDQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTg0NzE5MywiZXhwIjoxNzMxODU0MzkzfQ.xmAl6azI5rd6Z6Or7lhu2ynTghEnBmOGGSNaDF3WH9s
 
 {
-    "nome":"instalação de internet",
-    "descricao":"a instalação de um ponto de internet"
+    "nome":"instalação de ponto de rede",
+    "descricao":"a instalação de um ponto que interliga varias casas"
 }
 
 ### 
 //Atribuir serviço a um provedor
 POST http://localhost:3000/servico/definir
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTU5NDE3OCwiZXhwIjoxNzMxNjAxMzc4fQ.ymHV6Hv3UROOAYOAlRaPoPHtltfTkuW_U-j-Ce4wgDQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTg0NzQ1NCwiZXhwIjoxNzMxODU0NjU0fQ.1BDUs6MCNO2WbpWw5aPVwxdGoVVEGClbflkffSaiPzU
 
 {
-    "servicoId": 1,
-    "provedorId": [1]
+    "servicoId": 3,
+    "provedorId": [3]
     //ADICIONAR HASH DE ADM
 }
 

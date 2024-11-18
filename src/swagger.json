@@ -899,6 +899,249 @@
                     }
                 }
             }
+        },
+        "/administrador": {
+            "get": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Obter todos os serviços administradores",
+                "description": "Retorna todos os serviços administradores no banco de dados. Se não houver administradores, retorna null.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "example": [
+                            {
+                                "id": 1,
+                                "nome": "William",
+                                "cpf": "000.000.000-00",
+                                "sexo": "m",
+                                "email": "email@gmail.com",
+                                "senha": "$2b$10$zIdZP3DqIW8hwUhCpkd1g.su.yzw8w4ndueCsk/gjRgIMgH40sz7i",
+                                "telefone": "(81) 9 9999-9999",
+                                "createdAt": "2024-11-13T15:51:19.582Z",
+                                "updatedAt": "2024-11-13T15:51:19.583Z",
+                                "cnpj": "",
+                                "role": "administrador"
+                            },
+                            {
+                                "id": 4,
+                                "nome": "William",
+                                "cpf": "000.000.000-00",
+                                "sexo": "m",
+                                "email": "email443@gmail.com",
+                                "senha": "$2b$10$jgZVwQiUY6RHZcbDCRHpSOdGW8iImsbBMPj0ll6Caqdn0eH46IXau",
+                                "telefone": "(81) 9 9999-9999",
+                                "createdAt": "2024-11-14T14:22:50.931Z",
+                                "updatedAt": "2024-11-14T14:22:50.932Z",
+                                "cnpj": "",
+                                "role": "administrador"
+                            }
+                        ]
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/administrador/{Id}": {
+            "get": {
+                "tags": [
+                    "Administrador"
+                ],
+                "summary": "Retorna um administrador",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "example": {
+                            "id": 1,
+                            "nome": "William",
+                            "cpf": "000.000.000-00",
+                            "sexo": "m",
+                            "email": "email@gmail.com",
+                            "senha": "$2b$10$zIdZP3DqIW8hwUhCpkd1g.su.yzw8w4ndueCsk/gjRgIMgH40sz7i",
+                            "telefone": "(81) 9 9999-9999",
+                            "createdAt": "2024-11-13T15:51:19.582Z",
+                            "updatedAt": "2024-11-13T15:51:19.583Z",
+                            "cnpj": "",
+                            "role": "administrador"
+                        }
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/cliente": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Obter todos os serviços clientes",
+                "description": "Retorna todos os clientes no banco de dados. Se não houver clientes, retorna null.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "example": [
+                            {
+                                "id": 1,
+                                "nome": "William",
+                                "cpf": "000.000.000-00",
+                                "sexo": "m",
+                                "email": "email@gmail.com",
+                                "senha": "$2b$10$zIdZP3DqIW8hwUhCpkd1g.su.yzw8w4ndueCsk/gjRgIMgH40sz7i",
+                                "telefone": "(81) 9 9999-9999",
+                                "createdAt": "2024-11-13T15:51:19.582Z",
+                                "updatedAt": "2024-11-13T15:51:19.583Z",
+                                "cnpj": "",
+                                "role": "administrador"
+                            },
+                            {
+                                "id": 4,
+                                "nome": "William",
+                                "cpf": "000.000.000-00",
+                                "sexo": "m",
+                                "email": "email443@gmail.com",
+                                "senha": "$2b$10$jgZVwQiUY6RHZcbDCRHpSOdGW8iImsbBMPj0ll6Caqdn0eH46IXau",
+                                "telefone": "(81) 9 9999-9999",
+                                "createdAt": "2024-11-14T14:22:50.931Z",
+                                "updatedAt": "2024-11-14T14:22:50.932Z",
+                                "cnpj": "",
+                                "role": "administrador"
+                            }
+                        ]
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/cliente/{Id}": {
+            "get": {
+                "tags": [
+                    "Cliente"
+                ],
+                "summary": "Retorna um cliente",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "example": {
+                            "id": 1,
+                            "nome": "William",
+                            "cpf": "000.000.000-00",
+                            "sexo": "m",
+                            "email": "email@gmail.com",
+                            "senha": "$2b$10$zIdZP3DqIW8hwUhCpkd1g.su.yzw8w4ndueCsk/gjRgIMgH40sz7i",
+                            "telefone": "(81) 9 9999-9999",
+                            "createdAt": "2024-11-13T15:51:19.582Z",
+                            "updatedAt": "2024-11-13T15:51:19.583Z",
+                            "cnpj": "",
+                            "role": "administrador"
+                        }
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/provedor/{Id}": {
+            "get": {
+                "tags": [
+                    "Provedor"
+                ],
+                "summary": "Retorna um provedor",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "example": {
+                            "id": 1,
+                            "nome": "William",
+                            "cpf": "000.000.000-00",
+                            "sexo": "m",
+                            "email": "email@gmail.com",
+                            "senha": "$2b$10$zIdZP3DqIW8hwUhCpkd1g.su.yzw8w4ndueCsk/gjRgIMgH40sz7i",
+                            "telefone": "(81) 9 9999-9999",
+                            "createdAt": "2024-11-13T15:51:19.582Z",
+                            "updatedAt": "2024-11-13T15:51:19.583Z",
+                            "cnpj": "",
+                            "role": "administrador"
+                        }
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/provedor": {
+            "get": {
+                "tags": [
+                    "Provedor"
+                ],
+                "summary": "Obter todos os serviços provedores",
+                "description": "Retorna todos os provedores no banco de dados. Se não houver provedores, retorna null.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "example": [
+                            {
+                                "id": 1,
+                                "nome": "William",
+                                "cpf": "000.000.000-00",
+                                "sexo": "m",
+                                "email": "email@gmail.com",
+                                "senha": "$2b$10$zIdZP3DqIW8hwUhCpkd1g.su.yzw8w4ndueCsk/gjRgIMgH40sz7i",
+                                "telefone": "(81) 9 9999-9999",
+                                "createdAt": "2024-11-13T15:51:19.582Z",
+                                "updatedAt": "2024-11-13T15:51:19.583Z",
+                                "cnpj": "",
+                                "role": "administrador"
+                            },
+                            {
+                                "id": 4,
+                                "nome": "William",
+                                "cpf": "000.000.000-00",
+                                "sexo": "m",
+                                "email": "email443@gmail.com",
+                                "senha": "$2b$10$jgZVwQiUY6RHZcbDCRHpSOdGW8iImsbBMPj0ll6Caqdn0eH46IXau",
+                                "telefone": "(81) 9 9999-9999",
+                                "createdAt": "2024-11-14T14:22:50.931Z",
+                                "updatedAt": "2024-11-14T14:22:50.932Z",
+                                "cnpj": "",
+                                "role": "administrador"
+                            }
+                        ]
+                    },
+                    "204": {
+                        "description": "null"
+                    },
+                    "500": {
+                        "description": "Erro interno no servidor"
+                    }
+                }
+            }
         }
     }
 }

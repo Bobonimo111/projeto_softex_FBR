@@ -3,11 +3,11 @@ POST  http://localhost:3000/agendamento/novo
 Content-Type: application/json
 
 {
-    "servicoId":"1",
+    "servicoId":"3",
     "clienteId":"2"
     //O email não vai chegar ja que o TRIAL FREE ACABOU
 }
-###BUSCAR AGENDAMENTO
+###BUSCAR AGENDAMENTO POR ID
 GET http://localhost:3000/agendamento/1
 Content-Type: application/json
 
@@ -15,7 +15,7 @@ Content-Type: application/json
 
 }
 ###BUSCAR AGENDAMENTOS 
-GET http://localhost:3000/agendamento/
+GET http://localhost:3000/agendamento
 Content-Type: application/json
 
 {
