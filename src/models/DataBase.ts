@@ -1,11 +1,15 @@
 import { Sequelize } from "sequelize";
 
 export const sequelize = new Sequelize({
-    dialect: "sqlite",
-    storage: "database.sqlite"
+    dialect: "mysql",
+    username: "fbr_user",
+    password: "fbrPass",
+    database: "fbr_user",
+    host: "localhost",
+    port: 3306
 })
-// export const sequelize = new Sequelize("fbrDb", "docker", "fbrpass", {
-//     dialect: "postgres",
-//     host: "127.0.0.1",
-//     port: 5433
+// export const sequelize = new Sequelize("BANCO DE DADOS", "USUARIO", "SENHA", {
+//     dialect: "TIPO DE BANCO",
+//     host: "ENDEREÇO",
+//     port: PORTA DE ACESSO
 // })

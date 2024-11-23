@@ -1,7 +1,7 @@
 //CADASTRAR SERVIÇO
 POST http://localhost:3000/servico/criar
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTg0NzE5MywiZXhwIjoxNzMxODU0MzkzfQ.xmAl6azI5rd6Z6Or7lhu2ynTghEnBmOGGSNaDF3WH9s
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMjQwMTUwOCwiZXhwIjoxNzMyNDA4NzA4fQ.fLHl5EG-NG2nBT1bXfYTGBbj2tScBXvZgTzxNUcnQ9g
 
 {
     "nome":"instalação de ponto de rede",
@@ -12,11 +12,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNv
 //Atribuir serviço a um provedor
 POST http://localhost:3000/servico/definir
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMTg0NzQ1NCwiZXhwIjoxNzMxODU0NjU0fQ.1BDUs6MCNO2WbpWw5aPVwxdGoVVEGClbflkffSaiPzU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcmxvc21heWNvbjQ0M0BnbWFpbC5jb20iLCJzZW5oYSI6IjEyMzQiLCJydWxlIjoiYWRtaW5pc3RyYWRvciIsImlhdCI6MTczMjQwMTUwOCwiZXhwIjoxNzMyNDA4NzA4fQ.fLHl5EG-NG2nBT1bXfYTGBbj2tScBXvZgTzxNUcnQ9g
 
 {
-    "servicoId": 3,
-    "provedorId": [3]
+    "servicoId": 1,
+    "provedorId": [1]
     //ADICIONAR HASH DE ADM
 }
 
